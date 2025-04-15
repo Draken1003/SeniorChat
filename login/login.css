@@ -28,6 +28,7 @@ body {
 
 .login-space { /* le l'endroit ou y'a sentence + info-client + bottom-login-space*/
     margin: 10% 15% 10% 15%;
+    padding: 50px;
     border: 4px solid rgba(0, 0, 0, .06) ;
     border-radius: 12px;
     filter: drop-shadow(0 10 50 rgb(0,0,0,.25));
