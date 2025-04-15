@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    overflow: hidden;
+    
+}
+.left-bar{
+    background-color: var(--purple-color-light);
+    height: 100vh;
+    width: 2.5%;
+    border-radius: 0 10px 10px 0;
+}
+
+.calendar{
+    width: 100vw;
+    height: 100vh;
+    margin-top: 40px;
+    margin-left: 50px;
+}
+
+.month{
+    width: 50%;
+}
+
+.month-year-title{
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 50px;
+}
+
+.interval-day{
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.day{
+    font-family: Arial;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top:20px;
+    
+}
+
+.day-left{
+    text-align: center;   
+}
+
+.day-right{
+    cursor: pointer;
+    background-color: var(--green-color);
+    border: solid var(--green-color);
+    color: white;
+    padding: 10px;
+    padding-left: 30px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.day-right-active{
+    border: solid var(--blue-color);
+}
+
+#popup{
+    display: none;
+    position: absolute;
+    background-color: var(--purple-color-light);
+    height: 100px;
+    width: 300px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 2.5% 100%, 2.5% 10%);
+    border-radius: 0 10px 10px 0;
+    padding: 40px 50px;
+}
+
+#popup > h2{
+    font-family: Arial;
+    font-weight: bold;
+    color: var(--purple-color-dark);
+}
+
+#popup > p{
+    margin-top: 20px;
+    font-family: Arial;
+    font-weight: bold;
+    color: var(--purple-color);
+}
