@@ -40,7 +40,7 @@
     <div class="add-event" id="add-event">
         <img class="quitter" src="icon/button-icon/croix.png" onclick="showAddEvent(true)" alt="">
         <h1>Nouveau évenement</h1>
-        <form class="add-event-form" action="post">
+        <form class="add-event-form" action="" method="get">
             <div class="form-row">
                 <img src="icon/titre.png" alt="">
                 <label for="event-name">Titre</label>
@@ -51,10 +51,9 @@
                 <img src="icon/liste.png" alt="">
                 <label for="event-type">Type</label>
                 <div class="button-group">
-                    <input type="button" name="event" id="event-type-event" value="Événement">
-                    <label for="event-type-event"></label>
-                    <input type="button" name="meet" id="event-type-meet" value="Réunion">
-                    <input type="button" name="perso" id="event-type-perso" value="Personel">
+                    <input type="button" name="event" id="event-type-event" value="Événement" style="background-image: url('icon/button-icon/evenement.png');">                    
+                    <input type="button" name="meet" id="event-type-meet" value="Réunion" style="background-image: url('icon/button-icon/reunion.png');">
+                    <input type="button" name="perso" id="event-type-perso" value="Personnel" style="background-image: url('icon/button-icon/personnel.png');">
                 </div><br>
             </div>
         
@@ -87,7 +86,7 @@
 </body>
 
 <script>
-    
+
     function setActive(id) {
         var event = document.getElementById(id);
         if (event.classList.contains("day-right-active")) {
