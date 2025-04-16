@@ -7,6 +7,8 @@ body{
     overflow: hidden;
     
 }
+
+/*-----------------------------------------------------------------------*/
 .left-bar{
     background-color: var(--purple-color-light);
     height: 100vh;
@@ -15,14 +17,16 @@ body{
 }
 
 .calendar{
-    width: 100vw;
+    width: 50vw;
     height: 100vh;
     margin-top: 40px;
     margin-left: 50px;
+    overflow-y: scroll;
 }
 
 .month{
-    width: 50%;
+    width: 90%;
+    margin-bottom: 50px;
 }
 
 .month-year-title{
@@ -38,21 +42,22 @@ body{
     margin-top: 30px;
 }
 
-.day{
+.event-day{
     font-family: Arial;
     font-weight: bold;
     display: flex;
     align-items: center;
     gap: 20px;
     margin-top:20px;
+    width: 100%;
     
 }
 
-.day-left{
+.event-day-left{
     text-align: center;   
 }
 
-.day-right{
+.event-day-right{
     cursor: pointer;
     background-color: var(--green-color);
     border: solid var(--green-color);
@@ -67,7 +72,24 @@ body{
     border: solid var(--blue-color);
 }
 
-#popup{
+.add-event-button{
+    background-color: var(--purple-color);
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 100%;
+    padding: 15px;
+    display: flex;
+}
+.add-event-button > img{
+    margin: auto;
+}
+
+/*--------------------------------------------------------------------*/
+
+.popup{
     display: none;
     position: absolute;
     background-color: var(--purple-color-light);
@@ -78,15 +100,115 @@ body{
     padding: 40px 50px;
 }
 
-#popup > h2{
+.popup > h2{
     font-family: Arial;
     font-weight: bold;
     color: var(--purple-color-dark);
 }
 
-#popup > p{
+.popup > p{
     margin-top: 20px;
     font-family: Arial;
     font-weight: bold;
     color: var(--purple-color);
 }
+
+/*--------------------------------------------------------------------*/
+
+.add-event{
+    display: none;
+    box-shadow: 0px 0px 40px 5px rgba(189,189,189,1);
+    height: fit-content;
+    width: 25vw;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+
+    font-family: Arial;
+    font-weight: bold;
+    color: black;
+}
+
+.quitter{
+    cursor: pointer;
+    width: 20px;
+}
+.add-event > h1{
+    font-size: 1.5rem;
+    margin: 20px 0 50px 0;
+    text-align: center;
+}
+
+.form-row{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+img{
+    width: 20px;
+    margin-right: 10px;
+}
+
+.button-group{
+    display: flex;
+    align-items: center;
+    margin-left: 20%;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.bottom-row{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+input{
+    width: 65%;
+    border-radius: 10px;
+    border: 1px solid var(--gray-color);
+    margin-left: 20%;
+    padding: 10px;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+input[type=button]{
+    width: 90px;
+    margin: 0;
+}
+
+input[type=button]:focus{
+    background-color: #5964d946;
+    border: solid 1px var(--purple-color);
+}
+
+input[type=submit], input[type=reset]{
+    width: 100px;
+    height: auto;
+    padding: 10px;
+    margin-left: 0;
+    cursor: pointer;
+}
+
+input[type=submit]{
+    background-color: var(--purple-color);
+    color: white;
+    border: none;
+}
+
+input[type=reset]{
+    background-color: white;
+    border: 1px solid var(--purple-color);
+    color: var(--purple-color-dark);
+}
+
+/*--------------------------------------------------------------------*/
+
+
+
