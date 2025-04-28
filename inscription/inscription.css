@@ -1,0 +1,68 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--purple-color-light);
+}
+
+.sign-container{
+
+    background-color: aqua;
+    text-align: center;
+    padding: 50px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.sign-container p{
+    font-family: "Calibri";
+    font-size: 1.5rem;
+    color: black;
+    border-radius:10px ;
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-client{
+    flex-direction: column;
+    display: flex;
+    gap: 15px;
+    background-color: #f7f7f7;
+}
+
+input{
+    border: 2px solid gray;
+    padding: 5px;
+    border-style: none;
+    background-color: rgba(230, 228, 228, 0.608);
+    border-radius: 5px; 
+
+}
+input:focus{
+    outline: 1.5px solid #F94B27;
+}
+
+input[type="password"]{
+    width: fit-content;
+    padding: 5px;
+
+
+}
+
+input[type="submit"]{
+
+    margin-top: 15px;
+    color: #f7f7f7;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #F94B27;
+    border: 1.5px solid #f7f7f7;
+}
+
+input[type="submit"]:hover {
+    border: 1.5px solid #F94B27;
+    background-color: #f7f7f7;
+    color: #F94B27;
+}
