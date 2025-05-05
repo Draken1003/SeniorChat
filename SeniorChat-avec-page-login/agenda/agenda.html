@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../color.css">
+    <link rel="stylesheet" href="agenda.css">
+    <title>SeniorChat</title>
+</head>
+<body>
+    <div class="left-bar"></div>
+    <div class="calendar">
+        <div class="month">
+            <h1 class="month-year-title">Avril 2025</h1>
+            <h2 class="interval-day">21-27 Avril</h2>
+            <div class="day">
+                <div class="day-left">
+                    <p>dim</p>
+                    <p>24</p>
+                </div>
+                <div class="day-right" id="day-right" onclick="setActive(), showPopup()">
+                    Rdv exam (linga GO)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup">
+        <h2>Description:</h2>
+        <p>Conférence pour la pension d’invalidité (fin d’annuité)</p>
+    </div>
+</body>
+
+<script>
+    function setActive() {
+        var event = document.getElementById("day-right");
+        if (event.classList.contains("day-right-active")) {
+            event.classList.remove("day-right-active");
+        } else {
+            event.classList.add("day-right-active");
+        }
+    }
+    function showPopup() {
+        var popup = document.getElementById("popup");
+        var event = document.getElementById("day-right");
+        popup.style.top = event.getBoundingClientRect().top + event.clientHeight/2 + "px";
+        popup.style.left = event.getBoundingClientRect().left +event.clientWidth + 20 + "px";
+
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+        } else {
+            popup.style.display = "block";
+        }
+    }
+</script>
+
+</html>

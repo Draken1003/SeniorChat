@@ -1,0 +1,169 @@
+body {
+    background-color: var(--purple-color-light);
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    overflow: hidden; /* Bloque tout scroll global */
+}
+
+
+.right-part {
+    background-color: #FFFFFF;
+    height: 100vh;
+    width: 40%;
+    border-radius: 10px 0 0 10px;
+    box-sizing: border-box; /* Inclut padding/border dans la hauteur */
+    padding: 20px 0; /* Espacement interne */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Empêche le scroll dans ce conteneur */
+}
+
+.title {
+    margin: 0 0 20px 5%;
+}
+
+.title > p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--purple-color-dark);
+    margin: 0 0 5px 10px;
+}
+
+.login-space { /* le l'endroit ou y'a sentence + info-client + bottom-login-space*/
+    margin: 0 15%;
+    padding: 20px;
+    border: 4px solid rgba(0, 0, 0, .06);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Scroll seulement si vraiment nécessaire */
+    flex-grow: 1; /* Occupe l'espace disponible */
+    max-height: calc(100vh - 40px); /* Compense le padding */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.sentence { /* Connectez-vous */
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2.25rem;
+    text-align: center;
+}
+
+form{
+    width: 70%;
+}
+
+.info-client{
+    flex-direction: column;
+    display: flex;
+    gap: 15px;
+}
+
+.fields-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.info-client > input {
+    appearance: none;
+	border: none;
+	outline: none;
+	border-bottom: .2em solid var(--purple-color-dark);
+	background: var(--purple-color-light);
+	border-radius: .2em .2em 0 0;
+	padding: 10px;
+	color: var(--purple-color);
+}
+
+
+.info-client > input[type=text],
+.info-client > input[type=password] {
+    margin-bottom: 5%;
+}
+
+.mdp-oublie {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 1% 0 7% 0;
+    text-align: right;
+    color: var(--purple-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+.mdp-oublie:hover {
+    text-decoration: underline;
+}
+.mdp-oublie:active {
+    color: var(--purple-color-dark);
+}
+
+/* ------------------------------- bouton se connecter ------------------------------- */
+input[type=submit] {
+	appearance: none;
+    border: 2px solid var(--purple-color-dark);
+	background: var(--purple-color-dark);
+	padding: 10px;
+	color: #ffffff;
+	border-radius: 10px;
+    transition: .5s;
+    font-size: 1.125rem;
+}
+input[type=submit]:hover {
+	background: none;
+	color: var(--purple-color-dark);
+}
+input[type=submit]:active {
+    border: 2px solid var(--purple-color-dark);
+	background: var(--purple-color-light);
+	color: var(--purple-color-dark);
+    transition: .2s;
+}
+/* ------------------------------------------------------------------------------------ */
+
+/* ------------------------------- ptit message en bas pour créer un compte si on en a pas ------------------------------- */
+.bottom-login-space {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-bottom: 5%;
+    font-size: 0.875rem;
+}
+.bottom-login-space > a {
+    color: var(--purple-color);
+    text-decoration: none;
+}
+.bottom-login-space > a:hover {
+    text-decoration: underline;
+}
+.bottom-login-space > a:active {
+    color: var(--purple-color-dark);
+}
+ /* ---------------------------------------------------------------------------------------------------------------------- */
+
+ /* Ajustements pour petits écrans */
+@media (max-height: 700px) {
+    .login-space {
+        margin: 0 10%;
+        padding: 15px;
+        max-height: calc(100vh - 30px);
+    }
+    .title > p {
+        font-size: 1.5rem;
+    }
+    .sentence {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .right-part {
+        width: 100%;
+        border-radius: 0;
+    }
+}
