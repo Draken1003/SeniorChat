@@ -41,11 +41,6 @@ body {
     flex-grow: 1; /* Occupe l'espace disponible */
     max-height: calc(100vh - 40px); /* Compense le padding */
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 80px;
 }
 
 .sentence { /* Connectez-vous */
@@ -56,14 +51,11 @@ body {
     text-align: center;
 }
 
-form{
-    width: 70%;
-}
-
 .info-client{
     flex-direction: column;
     display: flex;
     gap: 15px;
+    margin: 5% 15% 10% 15%; /* a modif ptet */
 }
 
 .fields-title {
@@ -72,18 +64,27 @@ form{
     margin: 0;
 }
 
-.info-client > input {
+.info-client > input[type=text] {
     appearance: none;
 	border: none;
 	outline: none;
 	border-bottom: .2em solid var(--purple-color-dark);
 	background: var(--purple-color-light);
 	border-radius: .2em .2em 0 0;
-	padding: 10px;
+	padding: .5em;
 	color: var(--purple-color);
 }
 
-
+.info-client > input[type=password] {
+    appearance: none;
+	border: none;
+	outline: none;
+	border-bottom: .2em solid var(--purple-color-dark);
+	background: var(--purple-color-light);
+	border-radius: .2em .2em 0 0;
+	padding: .5em;
+	color: var(--purple-color);
+}
 .info-client > input[type=text],
 .info-client > input[type=password] {
     margin-bottom: 5%;

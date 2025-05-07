@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="profil.css" />
+    <link rel="stylesheet" href="../color.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Cal+Sans&family=Fredoka:wght@300..700&family=Nuosu+SIL&family=Platypi:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+    <title>Profil</title>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+      <h1>Profil</h1>
+    </header>
+    <div class="center-page">
+      <div class="photo">
+        <img src="../img/cessy.webp" id="pfp" />
+        <form>
+          <label>Charger votre image</label>
+          <input type="file" name="pfp"/>
+          <div class="buttons">
+            <button>Modifier</button>
+            <button>Supprimer</button>
+          </div>
+        </form>
+      </div>
+      <div class="bot-infos">
+        <form>
+          <div class="infos">
+            <img
+              src="./tran/img/user.png"
+              alt="une icône"
+              class="profil-icon"
+            />
+            <div class="right-infos">
+              <div class="text-infos">
+                <h2>Nom</h2>
+                <input type="text" id="nom" value="Cessy" readonly="readonly" />
+              </div>
+            </div>
+          </div>
+          <div class="infos">
+            <img
+              src="./tran/img/user.png"
+              alt="une icône"
+              class="profil-icon"
+            />
+            <div class="right-infos">
+              <div class="text-infos">
+                <h2>Prenom</h2>
+                <input
+                  type="text"
+                  id="prenom"
+                  value="David"
+                  readonly="readonly"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="infos">
+            <img
+              src="./tran/img/user.png"
+              alt="une icône"
+              class="profil-icon"
+            />
+            <div class="right-infos">
+              <div class="text-infos">
+                <h2>Pseudo</h2>
+                <input
+                  type="text"
+                  id="pseudo"
+                  value="CessyPrime"
+                  readonly="readonly"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="infos">
+            <img
+              src="./tran/img/phone.png"
+              alt="une icône"
+              class="profil-icon"
+            />
+            <div class="right-infos">
+              <div class="text-infos">
+                <h2>Téléphone</h2>
+                <input
+                  type="text"
+                  id="tel"
+                  value="06947290"
+                  readonly="readonly"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="infos">
+            <img
+              src="./tran/img/calendar.png"
+              alt="une icône"
+              class="profil-icon"
+            />
+            <div class="right-infos">
+              <div class="text-infos">
+                <h2>Date de naissance</h2>
+                <input
+                  type="date"
+                  id="birth-date"
+                  name="birth-date"
+                  value="1980-07-22"/>
+              </div>
+            </div>
+          </div>
+          <button>
+            Valider
+          </button>
+        </form>
+      </div>
+    </div>
+    </div>
+    
+  </body>
+</html>

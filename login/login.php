@@ -1,3 +1,31 @@
+<?php
+    // on vérifie que le formulaire à été posté car sinon il s'execute dès le début
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        include("../connexion.inc.php");
+        session_start();
+        $id = $_POST["identifiant"];
+        $mdp = $_POST["mdp"];
+                        
+        // On vérifie les identifiants
+        $verif = $cnx->prepare("SELECT identifiant, id FROM authentification WHERE identifiant = :id AND password = :mdp");
+        $verif->bindParam(':id', $id);
+        $verif->bindParam(':mdp', $mdp);
+        $verif->execute();
+                        
+        if ($verif->rowCount() > 0) {
+
+            $row = $verif->fetch();
+            $_SESSION['u_id'] = $row['id'];
+            $_SESSION['identifiant'] = $row['identifiant'];
+
+            header("Location: ../agenda/agenda.html"); // juste pour test donc faudrai mettre la vrai page
+            exit;
+        } else {
+            $error = "<p class='errorMessage'>identifiant ou mot de passe incorrect</p>";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +43,7 @@
             </div>
             <div class="login-space">
                 <p class="sentence">Connectez-vous:</p>
-                <form action="post">
-
+                <form action="" method="POST">
                     <div class="sign-container">
                         <div class="info-client">
                             <p class="fields-title">Identifiant</p>
@@ -31,6 +58,7 @@
                 <div class="bottom-login-space">
                     <p>Vous n'avez pas de compte ?</p>
                     <a href="../inscription/inscription.html">Créer un compte</a>
+                    <?php if (!empty($error)) echo "<p class='errorMessage'>$error</p>"; ?>
                 </div>
             </div>
         </div>
