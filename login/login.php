@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
     // on vérifie que le formulaire à été posté car sinon il s'execute dès le début
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include("../connexion.inc.php");
@@ -24,7 +24,7 @@
             $error = "<p class='errorMessage'>identifiant ou mot de passe incorrect</p>";
         }
     }
-?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,7 @@
                 <div class="bottom-login-space">
                     <p>Vous n'avez pas de compte ?</p>
                     <a href="../inscription/inscription.html">Créer un compte</a>
-                    <!-- <?php if (!empty($error)) echo "<p class='errorMessage'>$error</p>"; ?> -->
+                    <?php if (!empty($error)) echo "<p class='errorMessage'>$error</p>"; ?>
                 </div>
             </div>
         </div>
