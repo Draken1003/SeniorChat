@@ -7,18 +7,18 @@
         $mdp = $_POST["mdp"];
                         
         // On vérifie les identifiants
-        $verif = $cnx->prepare("SELECT identifiant, id FROM authentification WHERE identifiant = :id AND password = :mdp");
+        $verif = $cnx->prepare("SELECT id, identifiant FROM authentification WHERE identifiant = :id AND password = :mdp") ;
         $verif->bindParam(':id', $id);
         $verif->bindParam(':mdp', $mdp);
         $verif->execute();
-                        
+        echo "test"; 
         if ($verif->rowCount() > 0) {
-
+            echo "caca";
             $row = $verif->fetch();
             $_SESSION['u_id'] = $row['id'];
             $_SESSION['identifiant'] = $row['identifiant'];
 
-            header("Location: ../agenda/agenda.html"); // juste pour test donc faudrai mettre la vrai page
+            header("Location: ../agenda/index.php"); // juste pour test donc faudrai mettre la vrai page
             exit;
         } else {
             $error = "<p class='errorMessage'>identifiant ou mot de passe incorrect</p>";
@@ -27,7 +27,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +58,7 @@
                 <div class="bottom-login-space">
                     <p>Vous n'avez pas de compte ?</p>
                     <a href="../inscription/inscription.html">Créer un compte</a>
-                    <?php if (!empty($error)) echo "<p class='errorMessage'>$error</p>"; ?>
+                    <?php if (!empty($error)) echo "$error"; ?>
                 </div>
             </div>
         </div>
