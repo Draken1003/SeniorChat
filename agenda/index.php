@@ -1,4 +1,5 @@
 <?php
+include("../connexion.inc.php");
 session_start();
 
 if (!isset($_SESSION['identifiant'])) {
@@ -12,6 +13,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
     header("Location: ../login/login.php");
     exit;
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === '+') {
+    if (isset($_POST['id_e'])) {
+        try {
+            // Démarrer une transaction
+            $cnx->beginTransaction();
+
+            // Sécurisation de l'input
+            $id_e = (int)$_POST['id_e'];
+            $user_id = $_SESSION['u_id'];
+
+            // 1. Vérifier que l'événement existe et a des places disponibles
+            $event = $cnx->prepare("SELECT nbplaces FROM evenement WHERE id_e = ? FOR UPDATE");
+            $event->execute([$id_e]);
+            $event_data = $event->fetch();
+
+            if (!$event_data) {
+                $error = "Événement introuvable";
+                throw new Exception("Événement introuvable");
+            }
+
+            if ($event_data['nbplaces'] <= 0) {
+                $error = "Plus de places disponibles";
+                throw new Exception("Plus de places disponibles");
+            }
+
+            // 2. Vérifier que l'utilisateur n'est pas déjà inscrit
+            $check = $cnx->prepare("SELECT 1 FROM s_inscrire WHERE id = ? AND id_e = ?");
+            $check->execute([$user_id, $id_e]);
+
+            if ($check->fetch()) {
+                $error = "Vous êtes déjà inscrit à cet événement";
+                throw new Exception("Vous êtes déjà inscrit à cet événement");
+            }
+
+            // 3. Décrémenter le nombre de places
+            $update = $cnx->prepare("UPDATE evenement SET nbplaces = nbplaces - 1 WHERE id_e = ?");
+            $update->execute([$id_e]);
+
+            // 4. Ajouter l'inscription
+            $inscription = $cnx->prepare("INSERT INTO s_inscrire (id, id_e) VALUES (?, ?)");
+            $inscription->execute([$user_id, $id_e]);
+
+            // Valider la transaction
+            $cnx->commit();
+
+            // Stocker le message de succès en session
+            $_SESSION['flash_message'] = "Inscription réussie !";
+            $_SESSION['flash_type'] = "success";
+
+        } catch (Exception $e) {
+            // Annuler en cas d'erreur
+            $cnx->rollBack();
+            $_SESSION['flash_message'] = $e->getMessage();
+            $_SESSION['flash_type'] = "error";
+        }
+
+        // Rediriger vers la même page
+        header("Location: ".$_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,71 +86,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="color-font.css">
     
-    <title>Langue&Culture</title>
+<title>Agenda</title>
 </head>
 
 <body>
+    <?php 
+        if(isset($_SESSION['flash_message'])) {
+            $message = htmlspecialchars($_SESSION['flash_message'], ENT_QUOTES);
+            echo "<script>alert('".$message."');</script>";
+            unset($_SESSION['flash_message']);
+        }
+    ?>
     <div class="container">
         <div class="left">
             <div class="top">
             <form id="logout" method="POST">
                 <input type="submit" name="logout" value="">
             </form>
-                <h1>Recentes <br> conferences</h1>
+                <h1>evenements <br> à venir</h1>
             </div>
             
             <div class="confs">
                 <!-- php -->
-                <div class="conf">
-                    <h1>10 jui</h1>
-                    <p>30 000 km pour découvrir 30 pays en bicyclette</p>
-                    <form action="" method="post">
-                        <input type="submit" value="+">
-                    </form>
-                </div>
-                <!--------->
-                <div class="conf">
-                    <h1>10 jui</h1>
-                    <p>30 000 km pour découvrir 30 pays en bicyclette</p>
-                    <form action="" method="post">
-                        <input type="submit" value="+">
-                    </form>
-                </div>
-                <div class="conf">
-                    <h1>10 jui</h1>
-                    <p>30 000 km pour découvrir 30 pays en bicyclette</p>
-                    <form action="" method="post">
-                        <input type="submit" value="+">
-                    </form>
-                </div>
-                <div class="conf">
-                    <h1>10 jui</h1>
-                    <p>30 000 km pour découvrir 30 pays en bicyclette</p>
-                    <form action="" method="post">
-                        <input type="submit" value="+">
-                    </form>
-                </div>
-                <div class="conf">
-                    <h1>10 jui</h1>
-                    <p>30 000 km pour découvrir 30 pays en bicyclette</p>
-                    <form action="" method="post">
-                        <input type="submit" value="+">
-                    </form>
-                </div>
-                <div class="conf">
-                    <h1>10 jui</h1>
-                    <p>30 000 km pour découvrir 30 pays en bicyclette</p>
-                    <form action="" method="post">
-                        <input type="submit" value="+">
-                    </form>
-                </div>
-                <div class="conf">
-                    <h1>10 jui</h1>
-                    <p>30 000 km pour découvrir 30 pays en bicyclette</p>
-                    <form action="" method="post">
-                        <input type="submit" value="+">
-                    </form>
-                </div>
+                <?php
+                    $mois_fr = [
+                        1 => 'JANV', 
+                        2 => 'FÉVR', 
+                        3 => 'MARS', 
+                        4 => 'AVR', 
+                        5 => 'MAI', 
+                        6 => 'JUIN',
+                        7 => 'JUIL', 
+                        8 => 'AOÛT', 
+                        9 => 'SEPT', 
+                        10 => 'OCT', 
+                        11 => 'NOV', 
+                        12 => 'DÉC'
+                    ];
+                    $query = $cnx->query("SELECT * FROM evenement ORDER BY date_h;");
+                    $events = $query->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($events as $event) {
+                        echo '<div class="conf">';
+                        // convertit la date dans le bon format pour pouvoir l'afficher comme on veut
+                        $date = new DateTime($event['date_h']);
+                        $jour = $date->format('j');
+                        $mois = $mois_fr[(int)$date->format('n')];
+                        
+                        // affiche le jour et le mois
+                        echo "<h1>$jour<br>$mois</h1>";
+                        
+                        // affiche le libelle de l'event
+                        echo '<p>' . htmlspecialchars($event['libelle']) . '</p>';
+                        
+                        //affiche le nombre de places
+                        echo '<p>' . htmlspecialchars($event['nbplaces']) . ' places</p>';
+
+                        // bouton pour s'inscrire à l'event
+                        echo '  <form action="" method="post">
+                                    <input type="hidden" name="id_e" value="' . htmlspecialchars($event['id_e']) . '">
+                                    <input type="submit" name="action" value="+">
+                                </form>';
+                        echo '</div>';
+                    }  
+                ?>
             </div>
         </div>
 

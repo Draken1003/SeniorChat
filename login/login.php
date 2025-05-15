@@ -6,7 +6,7 @@
         $id = $_POST["identifiant"];
         $mdp = $_POST["mdp"];            
         // On vérifie les identifiants
-        $verif = $cnx->prepare("SELECT id, identifiant FROM authentification WHERE identifiant = :id AND password = :mdp") ;
+        $verif = $cnx->prepare("SELECT id, identifiant FROM authentification WHERE identifiant = :id AND password = :mdp");
         $verif->bindParam(':id', $id);
         $verif->bindParam(':mdp', $mdp);
         $verif->execute();
