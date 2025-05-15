@@ -4,21 +4,18 @@
         include("../connexion.inc.php");
         session_start();
         $id = $_POST["identifiant"];
-        $mdp = $_POST["mdp"];
-                        
+        $mdp = $_POST["mdp"];            
         // On vérifie les identifiants
         $verif = $cnx->prepare("SELECT id, identifiant FROM authentification WHERE identifiant = :id AND password = :mdp") ;
         $verif->bindParam(':id', $id);
         $verif->bindParam(':mdp', $mdp);
         $verif->execute();
-        echo "test"; 
         if ($verif->rowCount() > 0) {
-            echo "caca";
             $row = $verif->fetch();
             $_SESSION['u_id'] = $row['id'];
             $_SESSION['identifiant'] = $row['identifiant'];
 
-            header("Location: ../agenda/index.php"); // juste pour test donc faudrai mettre la vrai page
+            header("Location: ../messagerie/chat.php"); // juste pour test donc faudrai mettre la vrai page
             exit;
         } else {
             $error = "<p class='errorMessage'>identifiant ou mot de passe incorrect</p>";
@@ -56,8 +53,6 @@
                     </div>
                 </form>
                 <div class="bottom-login-space">
-                    <p>Vous n'avez pas de compte ?</p>
-                    <a href="../inscription/inscription.html">Créer un compte</a>
                     <?php if (!empty($error)) echo "$error"; ?>
                 </div>
             </div>

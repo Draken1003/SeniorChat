@@ -23,9 +23,10 @@
             } 
             if (isset($_POST['friendbtn'])) {
                 $_SESSION['id_friend'] = $_POST['friendbtn']; // Stocker l'ID de l'ami dans la session
-                echo $_SESSION['id_friend'];
+                
 
             }
+           
         ?>
 
         <!-- LES AMIS -->
@@ -174,7 +175,33 @@
                 btn.value=seniorID;
             };
 
-   
+            const chat = document.getElementById("chatbox");
+            let intervale = setInterval(()=> {
+                <?php 
+                    
+                ?>
+                if (!caca){ //si il y a un ajout de chat du contact 
+                    console.log("caca");
+                    let br = document.createElement("br");
+                    chat.appendChild(br);
+                    let div = document.createElement("div");
+                    div.classList.add("mes1");
+                    let strong = document.createElement("strong");
+                    strong.textContent = "pipi";//mettre $senior
+                    div.appendChild(strong);
+                    div.textContent = ".cacacaca"//mettre $row["texte"] 
+                    let div2 = document.createElement("div");
+                    div2.classList.add("horaire");
+                    div2.textContent = "popo";//mettre $row["date_h"]
+                    div.appendChild(div2);
+                    let button = document.createElement("button");
+                    button.classList.add("delete-msg-left");
+                    chat.appendChild(div);
+                }
+                    
+                
+                
+            },1000);
         </script> 
     </body>
 </html>

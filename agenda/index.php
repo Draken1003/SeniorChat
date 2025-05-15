@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
         <div class="left">
             <div class="top">
             <form id="logout" method="POST">
-                <input type="submit" name="logout" value="logout">
+                <input type="submit" name="logout" value="">
             </form>
                 <h1>Recentes <br> conferences</h1>
             </div>

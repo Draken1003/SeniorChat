@@ -145,6 +145,15 @@ input[type=submit]:active {
 .bottom-login-space > a:active {
     color: var(--purple-color-dark);
 }
+
+.errorMessage {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    border: 1px solid red;
+    background-color: rgb(255, 181, 181);
+    font-weight: bold;
+}
  /* ---------------------------------------------------------------------------------------------------------------------- */
 
  /* Ajustements pour petits écrans */
