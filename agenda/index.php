@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 <body>
     <?php 
         if(isset($_SESSION['flash_message'])) {
-            $message = htmlspecialchars($_SESSION['flash_message'], ENT_QUOTES);
+            $message = $_SESSION['flash_message'];
             echo "<script>alert('".$message."');</script>";
             unset($_SESSION['flash_message']);
         }

@@ -104,7 +104,7 @@
                 ]);
 
 
-                header("Location: " . $_SERVER['PHP_SELF']); // permet de redireger vers la même page ( pas besoin de refresh)
+                header("Location: ".$_SERVER['REQUEST_URI']); // permet de redireger vers la même page ( pas besoin de refresh)
                 exit;
             }
         
@@ -117,7 +117,7 @@
                 $stmt4 = $cnx->prepare($sql4);
                 $stmt4->execute([':messageId' => $messageId]);
 
-                header("Location: " . $_SERVER['PHP_SELF']); // permet de redireger vers la même page ( pas besoin de refresh)
+                header("Location: ".$_SERVER['REQUEST_URI']); // permet de redireger vers la même page ( pas besoin de refresh)
                 exit;
             
             }
