@@ -47,6 +47,8 @@ function createCalendar(date) {
       }
 
       let dayDiv = document.createElement("div"); // On crée une div pour le jour
+      dayDiv.id="day" + i; //ajout de l'id = day + numero du jour 
+      dayDiv.onclick= function(){daySelected(dayDiv.id)} ; //ajout de la fonction pour selectionner le jour ou on clique
       dayDiv.className = "day"; // On applique la classe "day" à la div
       let h1 = document.createElement("h1"); // On crée un élément h1 pour le numéro du jour
       h1.textContent = i;  // On met le numéro du jour dans l'élément h1
@@ -82,7 +84,7 @@ function createCalendar(date) {
 
    daysContainer.className = "days"; // On applique la classe "days" au conteneur des jours
 
-   
+   lastDaySelected = document.getElementsByClassName("selected")[0]; //variable fichier daySelected.js
 }
 
 function createRow() {

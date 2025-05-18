@@ -193,11 +193,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     </div>
                 </div>
                 <div class="add-event">
-                    <button>+</button>
+                    <button onclick="popup_open()">+</button>
                 </div>
             </div>
         </div>
-
+        <div class="pop-up" id="popup">    
+            <div class="close">
+                <button onclick="popup_close()">
+                    <img src="/icon/button-icon/croix (2).png" alt="">
+                </button>
+            </div>
+            <div class="title">
+                <h1>Ajouter une conference</h1>
+            </div>
+            <div class="inputs">
+                <form action="" method="post">
+                    <input type="text" placeholder="Titre" name="titre">
+                    <input type="text" placeholder="Thème" name="theme">
+                    <input type="text" placeholder="Type d'intervention" name="type">
+                    <input type="text" placeholder="Langue" name="langue">
+                    <div class="lieu">
+                        <input type="text" placeholder="Salle" name="salle">
+                        <input type="text" placeholder="Aile" name="aile">
+                    </div>
+                    <div class="duree">
+                        <input type="text" placeholder="Debut" name="debut">
+                        <img src="/icon/fleche.png" alt="fleche">
+                        <input type="text" placeholder="Fin" name="fin">
+                    </div>
+                    <textarea name="Description" value="Description" placeholder="Description" ></textarea>
+                    <div class="buttons">
+                        <input type="reset" value="Annuler">
+                        <input type="submit" value="Confirmer">
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="right">
             <div class="top">
                 <h1>jeu. 5</h1>
@@ -281,5 +312,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 <script src="js/afficheDescription.js"></script>
 <script src="js/daySelected.js"></script>
 <script src="js/changeMonth.js"></script>
+<script src="js/popup.js"></script>
 
 </html>

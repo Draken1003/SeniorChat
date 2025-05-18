@@ -1,42 +1,44 @@
-*{
+* {
     margin: 0;
     padding: 0;
     user-select: none;
 }
 
-body{
+body {
     height: 97vh;
     overflow: hidden;
     padding: 10px;
 }
 
-.container{
+.container {
     height: 100%;
-    display: flex;   
+    display: flex;
 }
 
 /* ------------------------left---------------------- */
-.container > .left{
+.container>.left {
     background-color: var(--primary-color);
     height: 100%;
     width: 25%;
     border-radius: 25px;
-   
+
 }
 
-.container > .left > .top {
+.container>.left>.top {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 25%;
     margin: 10px 10px 0 10px;
 }
-.container > .left > .top > form{
+
+.container>.left>.top>form {
     display: flex;
     justify-content: start;
     width: 100%;
 }
-.container > .left > .top > form > input{
+
+.container>.left>.top>form>input {
     background-color: transparent;
     background-image: url(/img/deconnexion.png);
     background-position: center;
@@ -46,7 +48,8 @@ body{
     height: 30px;
     cursor: pointer;
 }
-.container > .left > .top > h1{
+
+.container>.left>.top>h1 {
     font-family: var(--title-font);
     letter-spacing: 2px;
     color: var(--secondary-color);
@@ -55,7 +58,7 @@ body{
     font-size: 2vw;
 }
 
-.container > .left > .confs{
+.container>.left>.confs {
     height: 70%;
     display: flex;
     flex-direction: column;
@@ -70,14 +73,15 @@ body{
     width: 10px;
     border-radius: 10px;
 }
+
 .confs::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.22);
     border-radius: 10px;
 }
 
-.container > .left > .confs > .conf{
+.container>.left>.confs>.conf {
     background-color: var(--secondary-color);
-    color : var(--primary-color);
+    color: var(--primary-color);
     font-family: var(--text-font);
     display: flex;
     align-items: center;
@@ -85,51 +89,58 @@ body{
     padding: 20px 15px;
     border-radius: 20px;
 }
-.container > .left > .confs > .conf > h1{
+
+.container>.left>.confs>.conf>h1 {
     text-transform: uppercase;
     text-wrap: nowrap;
     text-align: center;
     font-size: 2vw;
 }
-.container > .left > .confs > .conf > p{
+
+.container>.left>.confs>.conf>p {
     font-weight: bold;
     font-size: 1vw;
 }
-.container > .left > .confs > .conf > form > input{
+
+.container>.left>.confs>.conf>form>input {
     background-color: var(--primary-color);
-    color : var(--secondary-color);
+    color: var(--secondary-color);
     border: none;
     padding: 3px 10px;
     border-radius: 10px;
     font-size: 1.5rem;
     cursor: pointer;
 }
+
 /* -------------------------------------------------- */
 
 /* ------------------------middle---------------------- */
-.container > .middle{
+.container>.middle {
     height: 100%;
     width: 50%;
     padding: 0 20px;
 }
 
-.container > .middle > .top{
+.container>.middle>.top {
     height: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-.container > .middle > .top > .title{
+
+.container>.middle>.top>.title {
     display: flex;
     gap: 20px;
 }
-.container > .middle > .top > .today{
+
+.container>.middle>.top>.today {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.container > .middle > .top > .today > button{
+
+.container>.middle>.top>.today>button {
     background-color: var(--primary-color);
     border: none;
     border-radius: 10px;
@@ -141,33 +152,36 @@ body{
     font-size: 0.5vw;
 }
 
-.container > .middle > .top > .title > h1{
+.container>.middle>.top>.title>h1 {
     font-family: var(--title-font);
     color: var(--primary-color);
     font-size: 3vw;
     text-transform: uppercase;
-} 
-.container > .middle > .top > .title > button{
+}
+
+.container>.middle>.top>.title>button {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
-.container > .middle > .top > .title > button > img{
+
+.container>.middle>.top>.title>button>img {
     width: 20px;
 }
-.container > .middle > .top > .title > button > .left{
+
+.container>.middle>.top>.title>button>.left {
     transform: rotate(180deg);
 }
 
-.container > .middle > .bottom{
+.container>.middle>.bottom {
     height: 79%;
 }
 
-.container > .middle > .bottom > .calendar{
+.container>.middle>.bottom>.calendar {
     height: 95%;
 }
 
-.container > .middle > .bottom > .calendar > .week{
+.container>.middle>.bottom>.calendar>.week {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -175,20 +189,20 @@ body{
     border-bottom: solid 2px rgba(0, 0, 0, 0.085);
 }
 
-.container > .middle > .bottom > .calendar > .week > .day{
+.container>.middle>.bottom>.calendar>.week>.day {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container > .middle > .bottom > .calendar > .week > .day > h1{
+.container>.middle>.bottom>.calendar>.week>.day>h1 {
     font-family: var(--text-font);
     font-size: 1vw;
     color: var(--primary-color);
     text-transform: uppercase;
 }
 
-.container > .middle > .bottom > .calendar > .days{
+.container>.middle>.bottom>.calendar>.days {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -197,14 +211,15 @@ body{
     width: 100%;
 }
 
-.container > .middle > .bottom > .calendar > .days > .row{
+.container>.middle>.bottom>.calendar>.days>.row {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 20px 0;
     width: 100%;
 }
-.container > .middle > .bottom > .calendar > .days > .row > .day{
+
+.container>.middle>.bottom>.calendar>.days>.row>.day {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,34 +230,34 @@ body{
     cursor: pointer;
 }
 
-.container > .middle > .bottom > .calendar > .days > .row > .selected{
+.container>.middle>.bottom>.calendar>.days>.row>.selected {
     background-color: var(--primary-color);
 }
 
-.container > .middle > .bottom > .calendar > .days > .row > .day > h1{
+.container>.middle>.bottom>.calendar>.days>.row>.day>h1 {
     font-family: var(--text-font);
     font-size: 1vw;
     color: var(--text-color);
     text-transform: uppercase;
 }
 
-.container > .middle > .bottom > .calendar > .days > .row > .day > .selected{
+.container>.middle>.bottom>.calendar>.days>.row>.day>.selected {
     color: white;
 }
 
-.container > .middle > .bottom > .calendar > .days > .row > .marked{
+.container>.middle>.bottom>.calendar>.days>.row>.marked {
     border: solid black;
     color: white;
 }
 
-.container > .middle > .bottom > .add-event{
+.container>.middle>.bottom>.add-event {
     display: flex;
     justify-content: end;
 }
 
-.container > .middle > .bottom > .add-event > button{
+.container>.middle>.bottom>.add-event>button {
     background-color: var(--primary-color);
-    color : var(--secondary-color);
+    color: var(--secondary-color);
     border: none;
     padding: 3px 10px;
     border-radius: 10px;
@@ -252,24 +267,174 @@ body{
 
 /* -------------------------------------------------- */
 
+/* ------------------------pop-up---------------------- */
+
+.pop-up {
+    display: none;
+    background-color: var(--primary-color);
+    width: 50%;
+    box-sizing: border-box;
+    margin: 0 20px;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.pop-up>.close {
+    height: 5%;
+}
+
+.pop-up>.close>button {
+    border: none;
+    background-color: var(--secondary-color);
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pop-up>.close>button>img {
+    width: 20px;
+}
+
+.pop-up>.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+}
+
+.pop-up>.title>h1 {
+    font-family: var(--title-font);
+    color: var(--secondary-color);
+    font-size: 3vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.pop-up>.inputs {
+    height: calc(100% - 15%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pop-up>.inputs>form {
+    height: calc(100% - 15%);
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pop-up>.inputs>form>input {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
+.pop-up>.inputs>form>.lieu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pop-up>.inputs>form>.lieu>input {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    border: none;
+    width: 40%;
+    border-radius: 10px;
+}
+
+.pop-up>.inputs>form>.duree {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pop-up>.inputs>form>.duree>input {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    border: none;
+    width: 30%;
+    border-radius: 10px;
+}
+
+.pop-up>.inputs>form>.duree>img {
+    width: 10%;
+}
+
+.pop-up>.inputs>form>textarea {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-family: var(--text-font);
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    height: 30%;
+}
+
+
+.pop-up>.inputs>form>.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pop-up>.inputs>form>.buttons>input[type="reset"] {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 40%;
+    cursor: pointer;
+}
+
+.pop-up>.inputs>form>.buttons>input[type="submit"] {
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 40%;
+    cursor: pointer;
+}
+
+
+
+
+/* -------------------------------------------------- */
 
 /* ------------------------right---------------------- */
 
-.container > .right {
+.container>.right {
     background-color: var(--primary-color);
     height: 100%;
     width: 25%;
     border-radius: 25px;
 }
 
-.container > .right > .top{
+.container>.right>.top {
     height: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.container > .right > .top > h1{
+.container>.right>.top>h1 {
     font-family: var(--title-font);
     letter-spacing: 2px;
     color: var(--secondary-color);
@@ -278,7 +443,7 @@ body{
     font-size: 3vw;
 }
 
-.container > .right > .evenements{
+.container>.right>.evenements {
     height: 60%;
     display: flex;
     flex-direction: column;
@@ -287,49 +452,53 @@ body{
     margin: 50px 15px 0 15px;
     overflow-y: scroll;
 }
+
 .evenements::-webkit-scrollbar {
     background-color: rgba(0, 0, 0, 0.22);
     width: 10px;
     border-radius: 10px;
 }
+
 .evenements::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.22);
     border-radius: 10px;
 }
 
-.container > .right > .evenements > .evenement{
+.container>.right>.evenements>.evenement {
     background-color: var(--tertiary-color);
     border-radius: 20px;
 }
 
-.container > .right > .evenements > .evenement > .top{
+.container>.right>.evenements>.evenement>.top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
 }
 
-.container > .right > .evenements > .evenement > .top > h2{
-    color : var(--secondary-color);
+.container>.right>.evenements>.evenement>.top>h2 {
+    color: var(--secondary-color);
     font-family: var(--text-font);
     font-size: 1vw;
 }
-.container > .right > .evenements > .evenement > .top > button{
+
+.container>.right>.evenements>.evenement>.top>button {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
-.container > .right > .evenements > .evenement > .top > button > img{
+
+.container>.right>.evenements>.evenement>.top>button>img {
     width: 20px;
     transform: rotate(0);
     transition: all 0.4s ease-in-out;
 }
 
-.container > .right > .evenements > .evenement > .top > button > .active-fleche{
+.container>.right>.evenements>.evenement>.top>button>.active-fleche {
     transform: rotate(90deg);
 }
 
-.container > .right > .evenements > .evenement > .bottom > hr{
+.container>.right>.evenements>.evenement>.bottom>hr {
     background-color: var(--primary-color);
     width: 90%;
     margin: 0 auto;
@@ -337,37 +506,39 @@ body{
     border: none;
 }
 
-.container > .right > .evenements > .evenement > .bottom{
+.container>.right>.evenements>.evenement>.bottom {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     transition: all 0.6s linear;
 }
 
-.container > .right > .evenements > .evenement > .active{
-    max-height: 500px; /* une hauteur suffisante pour ton contenu */
+.container>.right>.evenements>.evenement>.active {
+    max-height: 500px;
+    /* une hauteur suffisante pour ton contenu */
     opacity: 1;
 }
 
-.container > .right > .evenements > .evenement > .bottom > .description{
+.container>.right>.evenements>.evenement>.bottom>.description {
     padding: 30px;
 }
 
-.container > .right > .evenements > .evenement > .bottom > .description > p{
-    color : var(--secondary-color);
+.container>.right>.evenements>.evenement>.bottom>.description>p {
+    color: var(--secondary-color);
     font-family: var(--text-font);
     font-size: 1rem;
     padding: 0 15px;
 }
 
-.container > .right > .evenements > .evenement > .bottom > form{
+.container>.right>.evenements>.evenement>.bottom>form {
     display: flex;
     justify-content: end;
     padding: 10px;
 }
-.container > .right > .evenements > .evenement > .bottom > form > input{
+
+.container>.right>.evenements>.evenement>.bottom>form>input {
     background-color: var(--secondary-color);
-    color : var(--primary-color);
+    color: var(--primary-color);
     font-family: var(--text-font);
     font-weight: bold;
     border: none;
