@@ -7,6 +7,7 @@ $user =  "postgres";
 $pass =  "azerty";
 try {
     $cnx = new PDO("pgsql:host=localhost;dbname=SeniorChat_database", $user, $pass); 
+    $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e) {
     echo "ERREUR : La connexion a échouée ";
