@@ -110,6 +110,11 @@ body {
     border-radius: 10px;
     font-size: 1.5rem;
     cursor: pointer;
+    transition: .3s;
+}
+
+.container>.left>.confs>.conf>form>input:hover {
+    opacity: 50%;
 }
 
 /* -------------------------------------------------- */
@@ -135,15 +140,16 @@ table {
 th, td {
     border: 1px solid #ddd;
     width: 14.28%; /* 7 jours */
-    height: 90px;
+    height: 80px;
     text-align: center;
-    vertical-align: middle;
     cursor: pointer;
     position: relative;
+    vertical-align: middle;
 }
 th {
     background-color: #f4f4f4;
     cursor: default;
+    height: fit-content;
 }
 td.inactive {
     color: #bbb;
@@ -152,7 +158,6 @@ td.inactive {
 }
 td .day-number {
     display: block;
-    margin-bottom: 20px;
     font-weight: bold;
 }
 td.selected {
@@ -161,6 +166,7 @@ td.selected {
 .nav {
     margin: 10px 0;
     text-align: center;
+    height: 5%;
 }
 .nav a {
     text-decoration: none;
@@ -168,6 +174,29 @@ td.selected {
     font-weight: bold;
     margin: 0 15px;
     font-size: 18px;
+}
+
+.add-event{
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-event > button{
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px ;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.add-event > button:hover{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 
@@ -428,6 +457,10 @@ td.selected {
     padding: 8px;
     border-radius: 10px;
     cursor: pointer;
+    transition: .5s;
 }
 
+.container>.right>.evenements>.evenement>form>input:hover {
+    opacity: 50%;
+}
 /* -------------------------------------------------- */

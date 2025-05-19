@@ -287,7 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
                         // bouton pour s'inscrire à l'event
                         echo '  <form action="" method="post">
                                     <input type="hidden" name="id_e" value="' . htmlspecialchars($event['id_e']) . '">
-                                    <input type="submit" name="action" value="+">
+                                    <input type="submit" name="action" class="inscription" value="+">
                                 </form>';
                         echo '</div>';
                     }  
@@ -337,6 +337,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
                     ?>
                 </tbody>
             </table>
+            <div class="add-event">
+                <button onclick="popup_open()">Ajouter un événement</button>
+            </div>
             <!-- 
             <div class="top">
                 <div class="title">
@@ -414,6 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
                 </form>
             </div>
                 -->
+                
         </div>
         <div class="right">
             <?php if (isset($selectedDate)): ?>
@@ -434,7 +438,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
                             </div>
                             <form action="" method="post">
                                 <input type="hidden" name="id_e" value="<?= htmlspecialchars($event['id_e']) ?>">
-                                <input type="submit" name="deleteEvent" value="Se désinscrire">
+                                <input type="submit" class="deleteEvent" name="deleteEvent" value="Se désinscrire">
                             </form>
                         </div>
                     <?php endforeach; ?>
