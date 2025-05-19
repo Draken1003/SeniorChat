@@ -153,7 +153,54 @@ $monthNames = [
     9 => 'Septembre', 10 => 'Octobre', 11 => 'Novembre', 12 => 'Décembre'
 ];
 
+// gestion de la desinscription des évenements
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_POST['deleteEvent'] === 'Se désinscrire') {
+    if (isset($_POST['id_e'])) {
+        try {
+            $cnx->beginTransaction();
+            $id_e = (int)$_POST['id_e'];
+            $user_id = $_SESSION['u_id'];
+
+            // Vérification événement
+            $event = $cnx->prepare("SELECT id FROM s_inscrire WHERE id_e = ? AND id = ? FOR UPDATE");
+            $event->execute([$id_e, $user_id]);
+            $event_data = $event->fetch();
+
+            if (!$event_data) {
+                throw new Exception("Événement introuvable");
+            }
+
+            // Vérification inscription existante
+            $check = $cnx->prepare("SELECT 1 FROM s_inscrire WHERE id = ? AND id_e = ?");
+            $check->execute([$user_id, $id_e]);
+
+            if (!$check->fetch()) {
+                throw new Exception("L'évenement n'existe pas");
+            }
+
+            // suppression de l'entrée dans la table s_inscrire
+            $delete = $cnx->prepare("DELETE FROM s_inscrire WHERE id_e = ? AND id = ?");
+            $delete->execute([$id_e, $user_id]);
+            
+            // Mise à jour du nb de places
+            $update = $cnx->prepare("UPDATE evenement SET nbplaces = nbplaces + 1 WHERE id_e = ?");
+            $update->execute([$id_e]);
+
+            $cnx->commit();
+            $_SESSION['flash_message'] = "Désinscription réussie !";
+            $_SESSION['flash_type'] = "success";
+
+        } catch (Exception $e) {
+            $cnx->rollBack();
+            $_SESSION['flash_message'] = $e->getMessage();
+            $_SESSION['flash_type'] = "error";
+        }
+
+        header("Location: ".$_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -185,8 +232,8 @@ $monthNames = [
             Problème d'affichage du calendrier - Affichage du mois courant
         </div>
     <?php endif; ?>
-    // affiche un popup pour indiquer si on s'est bien inscrit ou non
-    <?php 
+    
+    <?php // affiche un popup pour indiquer si on s'est bien inscrit ou non
         if(isset($_SESSION['flash_message'])) {
             $message = $_SESSION['flash_message'];
             echo "<script>alert('".$message."');</script>";
@@ -386,7 +433,8 @@ $monthNames = [
                                 <p>Heure: <?= date('H:i', strtotime($event['heure'] ?? '')) ?></p>
                             </div>
                             <form action="" method="post">
-                                <input type="submit" name="deleteEvent" value="Supprimer">
+                                <input type="hidden" name="id_e" value="<?= htmlspecialchars($event['id_e']) ?>">
+                                <input type="submit" name="deleteEvent" value="Se désinscrire">
                             </form>
                         </div>
                     <?php endforeach; ?>
