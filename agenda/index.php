@@ -309,6 +309,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
             <div class="confs">
                 
                 <?php
+                // affichage des évenements publics
                     $mois_fr = [
                         1 => 'JANV', 
                         2 => 'FÉVR', 
