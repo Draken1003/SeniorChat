@@ -191,10 +191,10 @@ body {
 }
 
 .bottom>form>.bouton>input {
+    border: 1px solid var(--purple-color-dark);
     width: 50%;
     height: 60%;
     border-radius: 10px;
-    border: none;
     background-color: var(--purple-color-dark);
     color: var(--text-color);
     font-family: var(--text-font);
@@ -202,11 +202,16 @@ body {
     cursor: pointer;
     transition: .2s linear;
 }
+.bottom>form>.bouton>input:hover {
+    background-color: white;
+    border: solid var(--purple-color-dark) 1px;
+    color: var(--purple-color-dark);
+}
 
 .bottom>form>.bouton>input:first-child {
     background-color: white;
     color: var(--purple-color-dark);
-    border: 1px solid var(--purple-color-dark);
+    
 }
 .bottom>form>.bouton>input:first-child:hover{
     color: red;
