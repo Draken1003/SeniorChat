@@ -17,7 +17,7 @@ body {
 
 /* ------------------------left---------------------- */
 .container>.left {
-    background-color: var(--primary-color);
+    background-color: var(--purple-color-light);
     height: 100%;
     width: 25%;
     border-radius: 25px;
@@ -52,7 +52,7 @@ body {
 .container>.left>.top>h1 {
     font-family: var(--title-font);
     letter-spacing: 2px;
-    color: var(--secondary-color);
+    color: var(--text-color);
     text-align: center;
     text-transform: uppercase;
     font-size: 2vw;
@@ -80,8 +80,8 @@ body {
 }
 
 .container>.left>.confs>.conf {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-family: var(--text-font);
     display: flex;
     align-items: center;
@@ -97,14 +97,21 @@ body {
     font-size: 2vw;
 }
 
-.container>.left>.confs>.conf>p {
+.confs>.conf>.description{
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.container>.left>.confs>.conf>.description>p {
     font-weight: bold;
     font-size: 1vw;
 }
 
 .container>.left>.confs>.conf>form>input {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: var(--purple-color-light);
+    color: var(--text-color);
     border: none;
     padding: 3px 10px;
     border-radius: 10px;
@@ -124,13 +131,17 @@ body {
 .middle {
     font-family: var(--text-font);
     width: 50%;
-    margin: 20px auto;
     padding: 0 15px;
 }
-
-.middle > h1 {
+.calendar{
+    height: 100%;
+    margin: 20px auto;
+}
+.calendar > h1 {
     font-family: var(--title-font);
+    font-size: 2.5vw;
     text-align: center;
+    color: var(--purple-color-light);
 }
 table {
     border-collapse: collapse;
@@ -149,7 +160,6 @@ th, td {
 th {
     background-color: #f4f4f4;
     cursor: default;
-    height: fit-content;
 }
 td.inactive {
     color: #bbb;
@@ -160,8 +170,14 @@ td .day-number {
     display: block;
     font-weight: bold;
 }
+
+td .day-number:hover {
+    color: var(--purple-color);
+}
+
 td.selected {
-    background-color: #653dc189;
+    background-color: var(--purple-color-light);
+    color: #fafafa;
 }
 .nav {
     margin: 10px 0;
@@ -184,9 +200,9 @@ td.selected {
 }
 
 .add-event > button{
-    border: 2px solid var(--primary-color);
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    border: 2px solid var(--purple-color-light);
+    background-color: var(--purple-color-light);
+    color: var(--text-color);
     font-weight: bold;
     padding: 10px;
     border-radius: 10px ;
@@ -195,8 +211,8 @@ td.selected {
 }
 
 .add-event > button:hover{
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
 }
 
 
@@ -206,10 +222,10 @@ td.selected {
 
 .pop-up {
     display: none;
-    background-color: var(--primary-color);
-    width: 50%;
+    background-color: var(--purple-color-light);
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    margin: 0 20px;
     padding: 20px;
     border-radius: 25px;
 }
@@ -220,7 +236,7 @@ td.selected {
 
 .pop-up>.close>button {
     border: none;
-    background-color: var(--secondary-color);
+    background-color: var(--text-color);
     padding: 5px;
     border-radius: 10px;
     display: flex;
@@ -242,8 +258,8 @@ td.selected {
 
 .pop-up>.title>h1 {
     font-family: var(--title-font);
-    color: var(--secondary-color);
-    font-size: 3vw;
+    color: var(--text-color);
+    font-size: 2vw;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -256,67 +272,34 @@ td.selected {
 }
 
 .pop-up>.inputs>form {
-    height: calc(100% - 15%);
+    height: 70%;
     width: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 40px;
 }
 
 .pop-up>.inputs>form>input {
     padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-weight: bold;
     border: none;
     border-radius: 10px;
 }
 
-.pop-up>.inputs>form>.lieu {
-    display: flex;
-    justify-content: space-between;
-}
-
-.pop-up>.inputs>form>.lieu>input {
-    padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    font-weight: bold;
-    border: none;
-    width: 40%;
-    border-radius: 10px;
-}
-
-.pop-up>.inputs>form>.duree {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.pop-up>.inputs>form>.duree>input {
-    padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    font-weight: bold;
-    border: none;
-    width: 30%;
-    border-radius: 10px;
-}
-
-.pop-up>.inputs>form>.duree>img {
-    width: 10%;
-}
 
 .pop-up>.inputs>form>textarea {
     padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-family: var(--text-font);
     font-weight: bold;
     border: none;
     border-radius: 10px;
     height: 30%;
+    resize: none;
 }
 
 
@@ -327,8 +310,8 @@ td.selected {
 }
 
 .pop-up>.inputs>form>.buttons>input[type="reset"] {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-weight: bold;
     border: none;
     padding: 10px 20px;
@@ -338,8 +321,8 @@ td.selected {
 }
 
 .pop-up>.inputs>form>.buttons>input[type="submit"] {
-    background-color: var(--tertiary-color);
-    color: var(--secondary-color);
+    background-color: var(--purple-color);
+    color: var(--text-color);
     font-weight: bold;
     border: none;
     padding: 10px 20px;
@@ -356,7 +339,7 @@ td.selected {
 /* ------------------------right---------------------- */
 
 .container>.right {
-    background-color: var(--primary-color);
+    background-color: var(--purple-color-light);
     height: 100%;
     width: 25%;
     border-radius: 25px;
@@ -372,7 +355,7 @@ td.selected {
 .container>.right>.top>h1 {
     font-family: var(--title-font);
     letter-spacing: 2px;
-    color: var(--secondary-color);
+    color: var(--text-color);
     text-align: center;
     text-transform: uppercase;
     font-size: 3vw;
@@ -387,6 +370,12 @@ td.selected {
     margin: 50px 15px 0 15px;
     overflow-y: scroll;
 }
+.container>.right>.evenements>p {
+    font-family: var(--text-font);
+    font-size: 1.25vw;
+    text-align: center;
+    color: var(--text-color);
+}
 
 .evenements::-webkit-scrollbar {
     background-color: rgba(0, 0, 0, 0.22);
@@ -400,7 +389,7 @@ td.selected {
 }
 
 .container>.right>.evenements>.evenement {
-    background-color: var(--tertiary-color);
+    background-color: var(--purple-color);
     border-radius: 20px;
 }
 
@@ -412,13 +401,13 @@ td.selected {
 }
 
 .container>.right>.evenements>.evenement>.top>h2 {
-    color: var(--secondary-color);
+    color: var(--text-color);
     font-family: var(--text-font);
     font-size: 1vw;
 }
 
 .container>.right>.evenements>.evenement>hr {
-    background-color: var(--primary-color);
+    background-color: var(--purple-color-light);
     width: 90%;
     margin: 0 auto;
     height: 2px;
@@ -432,11 +421,11 @@ td.selected {
 }
 
 .container>.right>.evenements>.evenement>.description {
-    padding: 30px;
+    padding: 10px;
 }
 
 .container>.right>.evenements>.evenement>.description>p {
-    color: var(--secondary-color);
+    color: var(--text-color);
     font-family: var(--text-font);
     font-size: 1rem;
     padding: 0 15px;
@@ -449,8 +438,8 @@ td.selected {
 }
 
 .container>.right>.evenements>.evenement>form>input {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-family: var(--text-font);
     font-weight: bold;
     border: none;
@@ -463,4 +452,29 @@ td.selected {
 .container>.right>.evenements>.evenement>form>input:hover {
     opacity: 50%;
 }
+
+
+.container>.right>.select-day{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container>.right>.select-day> p {
+    font-family: var(--text-font);
+    font-size: 1.25vw;
+    text-align: center;
+    color: var(--text-color);
+}
+
+
 /* -------------------------------------------------- */
+
+.error-date {
+    color: #d9534f;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #d9534f;
+    border-radius: 4px;
+    text-align: center;
+}

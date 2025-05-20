@@ -1,9 +1,13 @@
 :root{
-    --purple-color-light:rgba(141, 150, 253, 0.29);
+    --purple-color-light:#8d96fd;
     --purple-color:#5963D9;
     --purple-color-dark:#0D1787;  
     --gray-color: #C8D9E6;
     --orange-color:#FDC58D;
     --green-color:#85D77E;
     --blue-color:#1771BA; 
+    --text-color:white;
+
+    --title-font: 'Anton', sans-serif;
+    --text-font: 'Inter', sans-serif;
 }

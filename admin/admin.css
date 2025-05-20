@@ -1,0 +1,322 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --------------------------Left---------------------- */
+.container-events {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px ;
+    width: calc(100%/3);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confs {
+    height: 90%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    padding: 10px 20px;
+    margin: 0 15px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.confs::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 10px;
+}
+
+.confs::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.22);
+    border-radius: 10px;
+}
+
+.confs>.conf {
+    box-shadow: 0px 3px 15px -4px rgba(0, 0, 0, 0.25);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
+    font-family: var(--text-font);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 15px;
+    border-radius: 20px;
+}
+
+.confs>.conf>h1 {
+    color: var(--purple-color-dark);
+    text-transform: uppercase;
+    text-wrap: nowrap;
+    text-align: center;
+    font-size: 1.5vw;
+}
+
+.confs>.conf>.description{
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.confs>.conf>.description>p {
+    color: var(--purple-color-dark);
+    font-weight: bold;
+    font-size: 1vw;
+}
+
+.confs>.conf>.description>p:nth-child(2) {
+    color: var(--purple-color);
+    font-size: 0.8vw;
+}
+
+.confs>.conf>form{
+    width: 11%;
+    height: 65%;
+}
+.confs>.conf>form>input {
+    width: 100%;
+    height: 100%;
+    background-color: var(--purple-color-dark);
+    background-image: url(/icon/button-icon/moin.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    color: var(--text-color);
+    border: none;
+    padding: 2px 14px;
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.confs>.conf>form>input:hover {
+    opacity: 50%;
+}
+
+/* ------------------------------------------------------ */
+
+/* --------------------------Middle---------------------- */
+.container-form {
+    width: calc(100%/3);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    
+}
+
+.ajout-compte {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px ;
+    height: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.ajout-event {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px ;
+    height: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.top {
+    height: 10%;
+    font-family: var(--text-font);
+    font-size: 0.8vw;
+}
+
+.top>h1 {
+    text-align: center;
+}
+
+.bottom {
+    box-sizing: border-box;
+    padding-top: 30px;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+.bottom>form {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bottom>form>input {
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    color: black;
+    font-family: var(--text-font);
+    font-weight: bold;
+    height: 12.5%;
+    width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: none;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.bottom>form>.bouton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    height: 20%;
+}
+
+.bottom>form>.bouton>input {
+    border: 1px solid var(--purple-color-dark);
+    width: 50%;
+    height: 60%;
+    border-radius: 10px;
+    background-color: var(--purple-color-dark);
+    color: var(--text-color);
+    font-family: var(--text-font);
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s linear;
+}
+.bottom>form>.bouton>input:hover {
+    background-color: white;
+    border: solid var(--purple-color-dark) 1px;
+    color: var(--purple-color-dark);
+}
+
+.bottom>form>.bouton>input:first-child {
+    background-color: white;
+    color: var(--purple-color-dark);
+    
+}
+.bottom>form>.bouton>input:first-child:hover{
+    color: red;
+    border-color: red;
+}
+
+
+textarea{
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    resize: none;
+    height: 40%;
+    width: 100%;
+    border: none;
+    color: black;
+    font-family: var(--text-font);
+    font-weight: bold;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+/* ------------------------------------------------------ */
+
+
+
+
+/* --------------------------Right---------------------- */
+
+.container-senior {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px ;
+    width: calc(100%/3);
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.seniors{
+    box-sizing: border-box;
+    padding-right: 20px;
+    height: 100%;
+    overflow-y: scroll;
+}
+.seniors::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 10px;
+}
+.seniors::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.22);
+    border-radius: 10px;
+}
+.senior{
+    display: flex;
+    height: 7.5%;
+    box-sizing: border-box;
+}
+
+.left{
+    width: 10%;
+}
+.left > .img{
+    width: 100%;
+    height: 87.5%;
+    border-radius: 25px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.middle{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+.middle > p{
+    color: black;
+    font-family: var(--text-font);
+    font-size: 1.25vw;
+}
+
+.right{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right > form > input[type="submit"]{
+    color: var(--purple-color-dark);
+    font-family: var(--text-font);
+    font-weight: bold;
+    border: 1px solid var(--purple-color-dark);
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+.right > form > input[type="submit"]:hover{
+    color: red;
+    border-color: red;
+}
+
+hr{
+    margin: 10px auto;
+    border:1px solid  rgba(13, 23, 135, 0.12);
+}

@@ -100,7 +100,7 @@ try {
     $_SESSION['flash_type'] = "error";
 }
 
-// Gestion de la date sélectionnée
+// // Gestion de la date sélectionnée
 $selectedDay = null;
 $selectedDate = null;
 $dailyEvents = [];
@@ -183,6 +183,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
             $delete = $cnx->prepare("DELETE FROM s_inscrire WHERE id_e = ? AND id = ?");
             $delete->execute([$id_e, $user_id]);
             
+            // si l'event est perso alors on le supprime de la table evenement.
+            // on verif d'abord si l'event est perso
+            $verif = $cnx->prepare("SELECT * FROM evenement WHERE id_e = ?");
+            $verif->execute([$id_e]);
+            $rq = $verif->fetch();
+
+            // ensuite on le supprime
+            if ($rq['perso'] == TRUE) {    
+                $delete2 = $cnx->prepare("DELETE FROM evenement WHERE id_e = ?");
+                $delete2->execute([$id_e]);
+            }
+
             // Mise à jour du nb de places
             $update = $cnx->prepare("UPDATE evenement SET nbplaces = nbplaces + 1 WHERE id_e = ?");
             $update->execute([$id_e]);
@@ -201,6 +213,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
         exit;
     }
 }
+
+// gestion des ajouts d'évenement personnels.
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addEvent'])) {
+        $message = "ajout d'evenement";
+        try {
+            $cnx->beginTransaction();
+
+            $user_id = $_SESSION['u_id'];
+            $libelle = $_POST['titre'];
+            $date = $_POST['date'];
+            $heure = $_POST['heure'];
+
+            // empeche d'avoir des champs vides
+            if (empty($libelle) || empty($date) || empty($heure)) {
+                throw new Exception("Tous les champs doivent être remplis.");
+            }
+
+            // on cherche l'id_e le plus grand et on ajoute 1 pour obtenir l'id_e du nouvel évenement.
+            $event = $cnx->prepare("SELECT MAX(id_e) as max_id FROM evenement");
+            $event->execute();
+            $event_data = $event->fetch(PDO::FETCH_ASSOC);
+            $event_id = ($event_data['max_id'] ?? 100) + 1;
+
+            // Vérification si l'évenement n'existe pas déjà ou si il n'y a pas déjà un évenement à au même moment.
+            $check = $cnx->prepare("
+                SELECT e.id_e 
+                FROM evenement e 
+                JOIN s_inscrire s ON e.id_e = s.id_e 
+                WHERE e.date_h = ? AND e.heure = ? AND s.id = ?
+            ");
+            $check->execute([$date, $heure, $user_id]);
+            if ($check->fetch()) {
+                throw new Exception("Vous avez déjà un événement personnel à ce moment.");
+            }
+            
+            // insertion de l'évenement dans la table evenement.
+            $event = $cnx->prepare("INSERT INTO evenement VALUES (?, ?, ?, ?, ?, ?)");
+            $event->execute([$event_id, $libelle, $date, 0, $heure, TRUE]);
+    
+            // liaison de l'évenement au sénior avec la table s_inscrire.
+            $inscription = $cnx->prepare("INSERT INTO s_inscrire (id, id_e) VALUES (?, ?)");
+            $inscription->execute([$user_id, $event_id]);
+            
+            $cnx->commit();
+            $_SESSION['flash_message'] = "Ajout réussie !";
+            $_SESSION['flash_type'] = "success";
+    
+        } catch (Exception $e) {
+            $cnx->rollBack();
+            $_SESSION['flash_message'] = $e->getMessage();
+            $_SESSION['flash_type'] = "error";
+        }
+    
+        header("Location: ".$_SERVER['REQUEST_URI']);
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -210,20 +278,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="color-font.css">
+    <link rel="stylesheet" href="/color.css">
     
 <title>Agenda</title>
-<style>
-        /* Ajoutez ce style pour les erreurs */
-        .error-date {
-            color: #d9534f;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #d9534f;
-            border-radius: 4px;
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
@@ -233,7 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
         </div>
     <?php endif; ?>
     
-    <?php // affiche un popup pour indiquer si on s'est bien inscrit ou non
+    <?php // affiche un popup  pour indiquer plein de trucs comme l'inscription.
         if(isset($_SESSION['flash_message'])) {
             $message = $_SESSION['flash_message'];
             echo "<script>alert('".$message."');</script>";
@@ -250,7 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
             </div>
             
             <div class="confs">
-                <!-- php -->
+                
                 <?php
                     $mois_fr = [
                         1 => 'JANV', 
@@ -269,27 +326,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
                     $query = $cnx->query("SELECT * FROM evenement ORDER BY date_h;");
                     $events = $query->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($events as $event) {
-                        echo '<div class="conf">';
-                        // convertit la date dans le bon format pour pouvoir l'afficher comme on veut
-                        $date = new DateTime($event['date_h']);
-                        $jour = $date->format('j');
-                        $mois = $mois_fr[(int)$date->format('n')];
-                        
-                        // affiche le jour et le mois
-                        echo "<h1>$jour<br>$mois</h1>";
-                        
-                        // affiche le libelle de l'event
-                        echo '<p>' . htmlspecialchars($event['libelle']) . '</p>';
-                        
-                        //affiche le nombre de places
-                        echo '<p>' . htmlspecialchars($event['nbplaces']) . ' places</p>';
+                        if (!$event['perso']) {
+                            echo '<div class="conf">';
+                            // convertit la date dans le bon format pour pouvoir l'afficher comme on veut
+                            $date = new DateTime($event['date_h']);
+                            $jour = $date->format('j');
+                            $mois = $mois_fr[(int)$date->format('n')];
+                            
+                            // affiche le jour et le mois
+                            echo "<h1>$jour<br>$mois</h1>";
+                            
+                            echo '<div class="description">';
 
-                        // bouton pour s'inscrire à l'event
-                        echo '  <form action="" method="post">
-                                    <input type="hidden" name="id_e" value="' . htmlspecialchars($event['id_e']) . '">
-                                    <input type="submit" name="action" class="inscription" value="+">
-                                </form>';
-                        echo '</div>';
+                            // affiche le libelle de l'event
+                            echo '<p>' . $event['libelle'] . '</p>';
+                            echo '<p>Heure: ' . date('H:i', strtotime($event['heure'] ?? '')) . '</p>';
+                            //affiche le nombre de places
+                            echo '<p>' . $event['nbplaces'] . ' places</p>';
+                            echo "</div>";
+                            // bouton pour s'inscrire à l'event
+                            echo '  <form action="" method="post">
+                                        <input type="hidden" name="id_e" value="' . $event['id_e'] . '">
+                                        <input type="submit" name="action" class="inscription" value="+">
+                                    </form>';
+                            echo '</div>';
+                        }
                     }  
                 ?>
             </div>
@@ -297,127 +358,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
         
         
         <div class="middle">
-            <h1>Agenda - <?= $monthNames[$month] . " " . $year ?></h1>
+            <div class="calendar" id="calendar">
+                <h1>Agenda - <?= $monthNames[$month] . " " . $year ?></h1>
 
-            <div class="nav">
-                <a href="?month=<?= $prevMonth ?>&year=<?= $prevYear ?><?= $selectedDay ? '&selected_day='.$selectedDay : '' ?>">&laquo; Mois précédent</a>
-                <a href="?month=<?= $nextMonth ?>&year=<?= $nextYear ?><?= $selectedDay ? '&selected_day='.$selectedDay : '' ?>">Mois suivant &raquo;</a>
-            </div>
+                <div class="nav">
+                    <a href="?month=<?= $prevMonth ?>&year=<?= $prevYear ?><?= $selectedDay ? '&selected_day='.$selectedDay : '' ?>">&laquo; Mois précédent</a>
+                    <a href="?month=<?= $nextMonth ?>&year=<?= $nextYear ?><?= $selectedDay ? '&selected_day='.$selectedDay : '' ?>">Mois suivant &raquo;</a>
+                </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <?php foreach ($weekDays as $dayName): ?>
-                            <th><?= $dayName ?></th>
-                        <?php endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $day = 1;
-                    // 6 semaines pour couvrir tous les cas
-                    for ($week = 0; $week < 6; $week++):
-                        echo "<tr>";
-                        for ($dow = 1; $dow <= 7; $dow++) {
-                            // Calcul si on est avant le début du mois ou après la fin
-                            if (($week === 0 && $dow < $firstDayOfWeek) || $day > $daysInMonth) {
-                                // Cellule vide ou inactive
-                                echo '<td class="inactive"></td>';
-                            } else {
-                                $selectedClass = ($day === $selectedDay) ? 'selected' : '';
-                                echo '<td class="'.$selectedClass.'" onclick="window.location.href=\'?month='.$month.'&year='.$year.'&selected_day='.$day.'\'">';
-                                echo '<span class="day-number">'.$day.'</span>';
-                                echo '</td>';
-                                $day++;
+                <table>
+                    <thead>
+                        <tr>
+                            <?php foreach ($weekDays as $dayName): ?>
+                                <th><?= $dayName ?></th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $day = 1;
+                        // 6 semaines pour couvrir tous les cas
+                        for ($week = 0; $week < 6; $week++):
+                            echo "<tr>";
+                            for ($dow = 1; $dow <= 7; $dow++) {
+                                // Calcul si on est avant le début du mois ou après la fin
+                                if (($week === 0 && $dow < $firstDayOfWeek) || $day > $daysInMonth) {
+                                    // Cellule vide ou inactive
+                                    echo '<td class="inactive"></td>';
+                                } else {
+                                    $selectedClass = ($day === $selectedDay) ? 'selected' : '';
+                                    echo '<td class="'.$selectedClass.'" onclick="window.location.href=\'?month='.$month.'&year='.$year.'&selected_day='.$day.'\'">';
+                                    echo '<span class="day-number">'.$day.'</span>';
+                                    echo '</td>';
+                                    $day++;
+                                }
                             }
-                        }
-                        echo "</tr>";
-                        if ($day > $daysInMonth) break;
-                    endfor;
-                    ?>
-                </tbody>
-            </table>
-            <div class="add-event">
-                <button onclick="popup_open()">Ajouter un événement</button>
-            </div>
-            <!-- 
-            <div class="top">
-                <div class="title">
-                    <button onclick="decreaseMonth()"><img class="left" src="../img/fleche2.png" alt=""></button>
-                    <h1 id="month"></h1><h1 id="year"></h1>
-                    <button onclick="increaseMonth()"><img src="../img/fleche2.png" alt=""></button>
-                </div>
-                <div class="today">
-                    <button onclick="today()">Aujourd'hui</button>
-                </div>
-            </div>
-            <div class="bottom">
-                <div class="calendar">
-                    <div class="week">
-                        <div class="day">
-                            <h1>Lun</h1>
-                        </div>
-                        <div class="day">
-                            <h1>Mar</h1>
-                        </div>
-                        <div class="day">
-                            <h1>Mer</h1>
-                        </div>
-                        <div class="day">
-                            <h1>Jeu</h1>
-                        </div>
-                        <div class="day">
-                            <h1>Ven</h1>
-                        </div>
-                        <div class="day">
-                            <h1>Sam</h1>
-                        </div>
-                        <div class="day">
-                            <h1>Dim</h1>
-                        </div>
-                    </div>
-                    <div class="days" id="days">
-                        
-                    </div>
-                </div>
+                            echo "</tr>";
+                            if ($day > $daysInMonth) break;
+                        endfor;
+                        ?>
+                    </tbody>
+                </table>
                 <div class="add-event">
-                    <button onclick="popup_open()">+</button>
+                    <button onclick="popup_open()">Ajouter un événement</button>
                 </div>
             </div>
-        </div>
-        <div class="pop-up" id="popup">    
-            <div class="close">
-                <button onclick="popup_close()">
-                    <img src="/icon/button-icon/croix (2).png" alt="">
-                </button>
+            
+
+            <div class="pop-up" id="popup">
+                <div class="close">
+                    <button onclick="popup_close()">
+                        <img src="../icon/button-icon/croix (2).png" alt="">
+                    </button>
+                </div>
+                <div class="title">
+                    <h1>Ajouter une évenement</h1>
+                </div>
+                <div class="inputs">
+                    <form action="" method="POST">
+                        <input type="text" placeholder="Titre" name="titre">
+                        <input type="date" name="date">
+                        <input type="time" step="60" name="heure">
+                        <div class="buttons">
+                            <input type="reset" value="Annuler">
+                            <input type="submit" name="addEvent" value="Confirmer">
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="title">
-                <h1>Ajouter une conference</h1>
-            </div>
-            <div class="inputs">
-                <form action="" method="post">
-                    <input type="text" placeholder="Titre" name="titre">
-                    <input type="text" placeholder="Thème" name="theme">
-                    <input type="text" placeholder="Type d'intervention" name="type">
-                    <input type="text" placeholder="Langue" name="langue">
-                    <div class="lieu">
-                        <input type="text" placeholder="Salle" name="salle">
-                        <input type="text" placeholder="Aile" name="aile">
-                    </div>
-                    <div class="duree">
-                        <input type="text" placeholder="Debut" name="debut">
-                        <img src="/icon/fleche.png" alt="fleche">
-                        <input type="text" placeholder="Fin" name="fin">
-                    </div>
-                    <textarea name="Description" value="Description" placeholder="Description" ></textarea>
-                    <div class="buttons">
-                        <input type="reset" value="Annuler">
-                        <input type="submit" value="Confirmer">
-                    </div>
-                </form>
-            </div>
-                -->
-                
+                 
         </div>
         <div class="right">
             <?php if (isset($selectedDate)): ?>
@@ -430,25 +439,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
                     <?php foreach ($dailyEvents as $event): ?>
                         <div class="evenement">
                             <div class="top">
-                                <h2><?= htmlspecialchars($event['libelle']) ?></h2>
+                                <h2><?= $event['libelle'] ?></h2>
                             </div>
                             <hr>
                             <div class="description">
                                 <p>Heure: <?= date('H:i', strtotime($event['heure'] ?? '')) ?></p>
                             </div>
                             <form action="" method="post">
-                                <input type="hidden" name="id_e" value="<?= htmlspecialchars($event['id_e']) ?>">
+                                <input type="hidden" name="id_e" value="<?= $event['id_e'] ?>">
                                 <input type="submit" class="deleteEvent" name="deleteEvent" value="Se désinscrire">
                             </form>
                         </div>
                     <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>Aucun événement prévu ce jour.</p>
-                    <?php endif; ?>
                 <?php else: ?>
-                    <p>Cliquez sur un jour pour voir les événements</p>
+                    <p>Aucun événement prévu ce jour.</p>
                 <?php endif; ?>
             </div>
+            <?php else: ?>
+                <div class="select-day">
+                    <p>Cliquez sur un jour pour voir les événements</p>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
