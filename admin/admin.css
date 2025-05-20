@@ -191,7 +191,7 @@ body {
 }
 
 .bottom>form>.bouton>input {
-    border: 1px solid var(--purple-color-dark);
+    border: 2px solid var(--purple-color-dark);
     width: 50%;
     height: 60%;
     border-radius: 10px;
@@ -204,7 +204,7 @@ body {
 }
 .bottom>form>.bouton>input:hover {
     background-color: white;
-    border: solid var(--purple-color-dark) 1px;
+    border: solid var(--purple-color-dark) 2px;
     color: var(--purple-color-dark);
 }
 
@@ -304,7 +304,7 @@ textarea{
     color: var(--purple-color-dark);
     font-family: var(--text-font);
     font-weight: bold;
-    border: 1px solid var(--purple-color-dark);
+    border: 2px solid var(--purple-color-dark);
     background-color: white;
     padding: 10px;
     border-radius: 10px;
