@@ -17,7 +17,7 @@ body {
 
 /* ------------------------left---------------------- */
 .container>.left {
-    background-color: var(--primary-color);
+    background-color: var(--purple-color-light);
     height: 100%;
     width: 25%;
     border-radius: 25px;
@@ -52,7 +52,7 @@ body {
 .container>.left>.top>h1 {
     font-family: var(--title-font);
     letter-spacing: 2px;
-    color: var(--secondary-color);
+    color: var(--text-color);
     text-align: center;
     text-transform: uppercase;
     font-size: 2vw;
@@ -80,8 +80,8 @@ body {
 }
 
 .container>.left>.confs>.conf {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-family: var(--text-font);
     display: flex;
     align-items: center;
@@ -103,167 +103,105 @@ body {
 }
 
 .container>.left>.confs>.conf>form>input {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: var(--purple-color-light);
+    color: var(--text-color);
     border: none;
     padding: 3px 10px;
     border-radius: 10px;
     font-size: 1.5rem;
     cursor: pointer;
+    transition: .3s;
+}
+
+.container>.left>.confs>.conf>form>input:hover {
+    opacity: 50%;
 }
 
 /* -------------------------------------------------- */
 
-/* ------------------------middle---------------------- */
-.container>.middle {
-    height: 100%;
+
+/*-----------------middle v2--------------------*/
+.middle {
+    font-family: var(--text-font);
     width: 50%;
-    padding: 0 20px;
+    padding: 0 15px;
 }
-
-.container>.middle>.top {
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.calendar{
+    height: 100%;
+    margin: 20px auto;
 }
-
-.container>.middle>.top>.title {
-    display: flex;
-    gap: 20px;
-}
-
-.container>.middle>.top>.today {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container>.middle>.top>.today>button {
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 10px;
-    color: var(--secondary-color);
-    font-family: var(--text-font);
-    font-weight: bold;
-    font-size: 0.5vw;
-}
-
-.container>.middle>.top>.title>h1 {
+.calendar > h1 {
     font-family: var(--title-font);
-    color: var(--primary-color);
-    font-size: 3vw;
-    text-transform: uppercase;
+    font-size: 2.5vw;
+    text-align: center;
+    color: var(--purple-color-light);
 }
-
-.container>.middle>.top>.title>button {
-    background-color: transparent;
-    border: none;
+table {
+    border-collapse: collapse;
+    width: 100%;
+    user-select: none;
+}
+th, td {
+    border: 1px solid #ddd;
+    width: 14.28%; /* 7 jours */
+    height: 80px;
+    text-align: center;
     cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+}
+th {
+    background-color: #f4f4f4;
+    cursor: default;
+}
+td.inactive {
+    color: #bbb;
+    cursor: default;
+    background: #fafafa;
+}
+td .day-number {
+    display: block;
+    font-weight: bold;
+}
+td.selected {
+    background-color: #653dc189;
+}
+.nav {
+    margin: 10px 0;
+    text-align: center;
+    height: 5%;
+}
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    margin: 0 15px;
+    font-size: 18px;
 }
 
-.container>.middle>.top>.title>button>img {
-    width: 20px;
-}
-
-.container>.middle>.top>.title>button>.left {
-    transform: rotate(180deg);
-}
-
-.container>.middle>.bottom {
-    height: 79%;
-}
-
-.container>.middle>.bottom>.calendar {
-    height: 95%;
-}
-
-.container>.middle>.bottom>.calendar>.week {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: solid 2px rgba(0, 0, 0, 0.085);
-}
-
-.container>.middle>.bottom>.calendar>.week>.day {
+.add-event{
+    height: 15%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container>.middle>.bottom>.calendar>.week>.day>h1 {
-    font-family: var(--text-font);
-    font-size: 1vw;
-    color: var(--primary-color);
-    text-transform: uppercase;
-}
-
-.container>.middle>.bottom>.calendar>.days {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 85%;
-    width: 100%;
-}
-
-.container>.middle>.bottom>.calendar>.days>.row {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px 0;
-    width: 100%;
-}
-
-.container>.middle>.bottom>.calendar>.days>.row>.day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    padding: 10px;
-    width: 2.5%;
-    height: 50%;
-    cursor: pointer;
-}
-
-.container>.middle>.bottom>.calendar>.days>.row>.selected {
-    background-color: var(--primary-color);
-}
-
-.container>.middle>.bottom>.calendar>.days>.row>.day>h1 {
-    font-family: var(--text-font);
-    font-size: 1vw;
+.add-event > button{
+    border: 2px solid var(--purple-color-light);
+    background-color: var(--purple-color-light);
     color: var(--text-color);
-    text-transform: uppercase;
-}
-
-.container>.middle>.bottom>.calendar>.days>.row>.day>.selected {
-    color: white;
-}
-
-.container>.middle>.bottom>.calendar>.days>.row>.marked {
-    border: solid black;
-    color: white;
-}
-
-.container>.middle>.bottom>.add-event {
-    display: flex;
-    justify-content: end;
-}
-
-.container>.middle>.bottom>.add-event>button {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    border: none;
-    padding: 3px 10px;
-    border-radius: 10px;
-    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px ;
     cursor: pointer;
+    transition: .5s;
 }
+
+.add-event > button:hover{
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
+}
+
 
 /* -------------------------------------------------- */
 
@@ -271,10 +209,10 @@ body {
 
 .pop-up {
     display: none;
-    background-color: var(--primary-color);
-    width: 50%;
+    background-color: var(--purple-color-light);
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    margin: 0 20px;
     padding: 20px;
     border-radius: 25px;
 }
@@ -285,7 +223,7 @@ body {
 
 .pop-up>.close>button {
     border: none;
-    background-color: var(--secondary-color);
+    background-color: var(--text-color);
     padding: 5px;
     border-radius: 10px;
     display: flex;
@@ -307,8 +245,8 @@ body {
 
 .pop-up>.title>h1 {
     font-family: var(--title-font);
-    color: var(--secondary-color);
-    font-size: 3vw;
+    color: var(--text-color);
+    font-size: 2vw;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -321,67 +259,34 @@ body {
 }
 
 .pop-up>.inputs>form {
-    height: calc(100% - 15%);
+    height: 70%;
     width: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 40px;
 }
 
 .pop-up>.inputs>form>input {
     padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-weight: bold;
     border: none;
     border-radius: 10px;
 }
 
-.pop-up>.inputs>form>.lieu {
-    display: flex;
-    justify-content: space-between;
-}
-
-.pop-up>.inputs>form>.lieu>input {
-    padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    font-weight: bold;
-    border: none;
-    width: 40%;
-    border-radius: 10px;
-}
-
-.pop-up>.inputs>form>.duree {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.pop-up>.inputs>form>.duree>input {
-    padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    font-weight: bold;
-    border: none;
-    width: 30%;
-    border-radius: 10px;
-}
-
-.pop-up>.inputs>form>.duree>img {
-    width: 10%;
-}
 
 .pop-up>.inputs>form>textarea {
     padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-family: var(--text-font);
     font-weight: bold;
     border: none;
     border-radius: 10px;
     height: 30%;
+    resize: none;
 }
 
 
@@ -392,8 +297,8 @@ body {
 }
 
 .pop-up>.inputs>form>.buttons>input[type="reset"] {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-weight: bold;
     border: none;
     padding: 10px 20px;
@@ -403,8 +308,8 @@ body {
 }
 
 .pop-up>.inputs>form>.buttons>input[type="submit"] {
-    background-color: var(--tertiary-color);
-    color: var(--secondary-color);
+    background-color: var(--purple-color);
+    color: var(--text-color);
     font-weight: bold;
     border: none;
     padding: 10px 20px;
@@ -421,7 +326,7 @@ body {
 /* ------------------------right---------------------- */
 
 .container>.right {
-    background-color: var(--primary-color);
+    background-color: var(--purple-color-light);
     height: 100%;
     width: 25%;
     border-radius: 25px;
@@ -437,7 +342,7 @@ body {
 .container>.right>.top>h1 {
     font-family: var(--title-font);
     letter-spacing: 2px;
-    color: var(--secondary-color);
+    color: var(--text-color);
     text-align: center;
     text-transform: uppercase;
     font-size: 3vw;
@@ -452,6 +357,12 @@ body {
     margin: 50px 15px 0 15px;
     overflow-y: scroll;
 }
+.container>.right>.evenements>p {
+    font-family: var(--text-font);
+    font-size: 1.25vw;
+    text-align: center;
+    color: var(--text-color);
+}
 
 .evenements::-webkit-scrollbar {
     background-color: rgba(0, 0, 0, 0.22);
@@ -465,7 +376,7 @@ body {
 }
 
 .container>.right>.evenements>.evenement {
-    background-color: var(--tertiary-color);
+    background-color: var(--purple-color);
     border-radius: 20px;
 }
 
@@ -477,40 +388,17 @@ body {
 }
 
 .container>.right>.evenements>.evenement>.top>h2 {
-    color: var(--secondary-color);
+    color: var(--text-color);
     font-family: var(--text-font);
     font-size: 1vw;
 }
 
-.container>.right>.evenements>.evenement>.top>button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.container>.right>.evenements>.evenement>.top>button>img {
-    width: 20px;
-    transform: rotate(0);
-    transition: all 0.4s ease-in-out;
-}
-
-.container>.right>.evenements>.evenement>.top>button>.active-fleche {
-    transform: rotate(90deg);
-}
-
-.container>.right>.evenements>.evenement>.bottom>hr {
-    background-color: var(--primary-color);
+.container>.right>.evenements>.evenement>hr {
+    background-color: var(--purple-color-light);
     width: 90%;
     margin: 0 auto;
     height: 2px;
     border: none;
-}
-
-.container>.right>.evenements>.evenement>.bottom {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.6s linear;
 }
 
 .container>.right>.evenements>.evenement>.active {
@@ -519,32 +407,52 @@ body {
     opacity: 1;
 }
 
-.container>.right>.evenements>.evenement>.bottom>.description {
+.container>.right>.evenements>.evenement>.description {
     padding: 30px;
 }
 
-.container>.right>.evenements>.evenement>.bottom>.description>p {
-    color: var(--secondary-color);
+.container>.right>.evenements>.evenement>.description>p {
+    color: var(--text-color);
     font-family: var(--text-font);
     font-size: 1rem;
     padding: 0 15px;
 }
 
-.container>.right>.evenements>.evenement>.bottom>form {
+.container>.right>.evenements>.evenement>form {
     display: flex;
     justify-content: end;
     padding: 10px;
 }
 
-.container>.right>.evenements>.evenement>.bottom>form>input {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+.container>.right>.evenements>.evenement>form>input {
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
     font-family: var(--text-font);
     font-weight: bold;
     border: none;
     padding: 8px;
     border-radius: 10px;
     cursor: pointer;
+    transition: .5s;
 }
+
+.container>.right>.evenements>.evenement>form>input:hover {
+    opacity: 50%;
+}
+
+
+.container>.right>.select-day{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container>.right>.select-day> p {
+    font-family: var(--text-font);
+    font-size: 1.25vw;
+    text-align: center;
+    color: var(--text-color);
+}
+
 
 /* -------------------------------------------------- */
