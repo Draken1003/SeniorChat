@@ -1,0 +1,222 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    overflow: hidden;
+    
+}
+
+/*-----------------------------------------------------------------------*/
+.left-bar{
+    background-color: var(--purple-color-light);
+    height: 100vh;
+    width: 2.5%;
+    border-radius: 0 10px 10px 0;
+}
+
+.calendar{
+    width: 50vw;
+    height: 100vh;
+    margin-top: 40px;
+    margin-left: 50px;
+    overflow-y: scroll;
+}
+
+.month{
+    width: 90%;
+    margin-bottom: 50px;
+}
+
+.month-year-title{
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 50px;
+}
+
+.interval-day{
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.event-day{
+    font-family: Arial;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top:20px;
+    width: 100%;
+    
+}
+
+.event-day-left{
+    text-align: center;   
+}
+
+.event-day-right{
+    cursor: pointer;
+    background-color: var(--green-color);
+    border: solid var(--green-color);
+    color: white;
+    padding: 10px;
+    padding-left: 30px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.day-right-active{
+    border: solid var(--blue-color);
+}
+
+.add-event-button{
+    background-color: var(--purple-color);
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 100%;
+    padding: 15px;
+    display: flex;
+}
+.add-event-button > img{
+    margin: auto;
+}
+
+/*--------------------------------------------------------------------*/
+
+.popup{
+    display: none;
+    position: absolute;
+    background-color: var(--purple-color-light);
+    height: 100px;
+    width: 300px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 2.5% 100%, 2.5% 10%);
+    border-radius: 0 10px 10px 0;
+    padding: 40px 50px;
+}
+
+.popup > h2{
+    font-family: Arial;
+    font-weight: bold;
+    color: var(--purple-color-dark);
+}
+
+.popup > p{
+    margin-top: 20px;
+    font-family: Arial;
+    font-weight: bold;
+    color: var(--purple-color);
+}
+
+/*--------------------------------------------------------------------*/
+
+.add-event{
+    display: none;
+    box-shadow: 0px 0px 40px 5px rgba(189,189,189,1);
+    height: fit-content;
+    width: 25vw;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+
+    font-family: Arial;
+    font-weight: bold;
+    color: black;
+}
+
+.quitter{
+    cursor: pointer;
+    width: 20px;
+}
+.add-event > h1{
+    font-size: 1.5rem;
+    margin: 20px 0 50px 0;
+    text-align: center;
+}
+
+.form-row{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+img{
+    width: 20px;
+    margin-right: 10px;
+}
+
+.button-group{
+    display: flex;
+    align-items: center;
+    margin-left: 15%;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button-group > input{
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 5px center;
+    padding-left: 30px;
+}
+
+.bottom-row{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+input{
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--gray-color);
+    margin-left: 15%;
+    padding: 10px;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+input[type=button]{
+    width: fit-content;
+    margin: 0;
+}
+
+input[type=button]:focus{
+    background-color: #5964d946;
+    border: solid 1px var(--purple-color);
+    color: var(--purple-color-dark);
+}
+
+input[type=submit], input[type=reset]{
+    width: 100px;
+    height: auto;
+    padding: 10px;
+    margin-left: 0;
+    cursor: pointer;
+}
+
+input[type=submit]{
+    background-color: var(--purple-color);
+    color: white;
+    border: none;
+}
+
+input[type=reset]{
+    background-color: white;
+    border: 1px solid var(--purple-color);
+    color: var(--purple-color-dark);
+}
+
+/*--------------------------------------------------------------------*/
+
+
+
