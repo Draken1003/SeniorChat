@@ -108,6 +108,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addEvent'])) {
     exit;
 }
 
+//On supprime le senior
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
+    $idSup = $_POST['supprId'];
+
+    $sqlAuth = "DELETE FROM AUTHENTIFICATION WHERE id = '$idSup'";
+    $stmtAuth = $cnx->prepare($sqlAuth);
+
+    $sqlSuppr = "DELETE FROM SENIOR WHERE id = '$idSup'";
+    $stmtSuppr = $cnx->prepare($sqlSuppr);
+
+    $sqlAgenda = "DELETE FROM AGENDA WHERE id_a = '$idSup'";
+    $stmtAgenda = $cnx->prepare($sqlAgenda);
+    
+    $sqlMessage = "DELETE FROM MESSAGE WHERE id = '$idSup' OR id_1 = '$idSup'";
+    $stmtMessage = $cnx->prepare($sqlMessage);
+
+    $stmtAuth->execute();       
+    $stmtSuppr->execute();          
+    $stmtAgenda->execute();
+    $stmtMessage->execute();
+
+    header("Location: " . $_SERVER['PHP_SELF']); // permet de redireger vers la même page ( pas besoin de refresh)
+    exit;
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -187,6 +212,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addEvent'])) {
                 </div>
             </div>
 
+             <?php
+                //CREER un senior
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['creer'])) {
+
+                    $req = $cnx->query("SELECT MAX(id) AS last_num FROM senior");
+                    $res = $req->fetch();
+                    $newNum = $res['last_num'] + 1;
+
+                    $sqlAgenda = "INSERT INTO agenda (id_a) VALUES ('$newNum')";
+                    $stmtAgenda = $cnx->prepare($sqlAgenda);
+                    $stmtAgenda->execute(); 
+
+                    $nom= $_POST['nom'];
+                    $prenom= $_POST['prenom'];
+                    $sqlSenior = "INSERT INTO SENIOR (id, nom, prenom,id_a) VALUES ('$newNum', '$nom', '$prenom','$newNum')";
+                    $stmt = $cnx->prepare($sqlSenior);
+                    $stmt->execute();   
+
+                    $id=$_POST['identifiant'];
+                    $pass= $_POST['motdepasse'];
+                    $sqlAuth = "INSERT INTO AUTHENTIFICATION (identifiant, password, id) VALUES ('$id', '$pass', '$newNum')";
+                    $stmtAuth = $cnx->prepare($sqlAuth);
+                    $stmtAuth->execute();
+
+                    echo "Compte créé.";
+                    header("Location: ".$_SERVER['REQUEST_URI']);
+                    exit;
+                }
+            ?>
+
             <div class="ajout-event">
                 <div class="top">
                     <h1>Créer un nouveau évènement</h1>
@@ -209,175 +264,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addEvent'])) {
         </div>
 
         <div class="container-senior">
-            <div class="seniors">
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="senior">
-                    <div class="left">
-                        <div class="img" style="background-image: url(/img/cessy.webp);"></div>
-                    </div>
-                    <div class="middle">
-                        <p>Cessy David</p>
-                    </div>
-                    <div class="right">
-                        <form action="">
-                            <input type="submit" value="supprimer">
-                        </form>
-                    </div>
-                </div>
-            </div>
+           
+         <?php
+            //on affiche les seniors
+            $sqlSeniors= "SELECT * FROM SENIOR";
+            $stmtSen= $cnx->query($sqlSeniors);
+
+            echo "<div class='seniors'>";
+
+            while ($senior = $stmtSen->fetch(PDO::FETCH_ASSOC)) {
+                $pdp= $senior['pdp'];
+                $prenomSen= $senior['prenom'];
+                $nomSen= $senior['nom'];
+                $idSen= $senior['id'];
+                echo "<div class='senior'> <div class='left'> <div class='img' style='background-image: url($pdp);'></div></div>
+                <div class='middle'> <p> $prenomSen $nomSen</p> </div> <div class='right'> <form action='' method='POST'> <input type='hidden' name='supprId' value=$idSen> <input type='submit' name='suppr' value='Supprimer'> </form> </div></div> <hr>";
+            }
+
+            echo "</div>";
+        ?>
             
             
         </div>
