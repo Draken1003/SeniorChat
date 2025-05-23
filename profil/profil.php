@@ -23,7 +23,7 @@
         $stmt3= $cnx->query($sql_id);
         $id_sen = $stmt3->fetchColumn();
       } else {
-          header("Location: login.php");
+          header("Location: ../login/login.php");
           exit();
       }
 

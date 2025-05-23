@@ -15,7 +15,7 @@
             $_SESSION['u_id'] = $row['id'];
             $_SESSION['identifiant'] = $row['identifiant'];
 
-            header("Location: ../test-menu.html"); // juste pour test donc faudrai mettre la vrai page
+            header("Location: ../accueil/accueil.php"); // juste pour test donc faudrai mettre la vrai page
             exit;
         } else {
             $error = "<p class='errorMessage'>identifiant ou mot de passe incorrect</p>";

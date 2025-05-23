@@ -300,9 +300,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_P
     <div class="container">
         <div class="left">
             <div class="top">
-            <form id="logout" method="POST">
-                <input type="submit" name="logout" value="">
-            </form>
+                <form id="logout" method="POST">
+                    <input type="submit" name="logout" value="">
+                </form>
                 <h1>evenements <br> à venir</h1>
             </div>
             

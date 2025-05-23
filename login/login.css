@@ -72,7 +72,7 @@ body {
 	background: var(--purple-color-light);
 	border-radius: .2em .2em 0 0;
 	padding: .5em;
-	color: var(--purple-color);
+	color: var(--purple-color-dark);
 }
 
 .info-client > input[type=password] {
@@ -83,7 +83,7 @@ body {
 	background: var(--purple-color-light);
 	border-radius: .2em .2em 0 0;
 	padding: .5em;
-	color: var(--purple-color);
+	color: var(--purple-color-dark);
 }
 .info-client > input[type=text],
 .info-client > input[type=password] {
