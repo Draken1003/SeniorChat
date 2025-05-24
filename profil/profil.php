@@ -14,7 +14,7 @@
   <body>
 
     <?php
-      include("../connexion.inc.php");
+      include("connexion.inc.php");
       session_start();
 
       if (isset($_SESSION['identifiant'])) {
@@ -33,8 +33,9 @@
           $pseudo = $_POST['pseudo'];
           $tel = $_POST['tel'];
           $birth_date = $_POST['date_n'];
+          $nvStatut = $_POST['statut'];
 
-          $sql2 = "UPDATE SENIOR SET nom = '$nom', prenom = '$prenom', pseudo = '$pseudo', tel = '$tel', date_n = '$birth_date' WHERE id = '$id_sen'";
+          $sql2 = "UPDATE SENIOR SET nom = '$nom', prenom = '$prenom', pseudo = '$pseudo', tel = '$tel', date_n = '$birth_date', statut='$nvStatut' WHERE id = '$id_sen'";
           $stmt2 = $cnx->prepare($sql2);
           $stmt2->execute();
 
@@ -89,11 +90,14 @@
                 $pseudo= $senior['pseudo'];
                 $tel= $senior['tel'];
                 $date_n= $senior['date_n'];
+                $statut= $senior['statut'];
+                
                 echo " <div class='infos'> <img src='./tran/img/user.png' alt='une icône' class='profil-icon'/>  <div class='right-infos'> <div class='title-infos'> <h2> Nom </h2> </div> <input type='text' name='nom' value='$nom' readonly='readonly' /> </div> </div>";
                 echo " <div class='infos'> <img src='./tran/img/user.png' alt='une icône' class='profil-icon'/> <div class='right-infos'> <div class='title-infos'> <h2> Prenom </h2> </div>  <input type='text' name='prenom' value='$prenom' readonly='readonly' />  </div> </div>";
                 echo " <div class='infos'> <img src='./tran/img/user.png' alt='une icône' class='profil-icon'/> <div class='right-infos'> <div class='title-infos'> <h2> Pseudo </h2> </div> <input type='text' name='pseudo' value='$pseudo' readonly='readonly' />  </div> </div>";
                 echo " <div class='infos'> <img src='./tran/img/user.png' alt='une icône' class='profil-icon'/> <div class='right-infos'> <div class='title-infos'> <h2> Telephone </h2> </div>  <input type='text' name='tel' value='$tel' readonly='readonly' />  </div> </div>";
                 echo " <div class='infos'> <img src='./tran/img/user.png' alt='une icône' class='profil-icon'/> <div class='right-infos'> <div class='title-infos'> <h2> Date de Naissance </h2> </div>  <input type='text' name='date_n' value='$date_n' readonly='readonly' /> </div> </div>";
+                echo " <div class='infos'> <img src='./tran/img/user.png' alt='une icône' class='profil-icon'/> <div class='right-infos'> <div class='title-infos'> <h2>Statut</h2> </div> <select name='statut'> <option value='actif'" . ($statut == 'actif' ? ' selected' : '') . ">Actif</option> <option value='pas actif'" . ($statut == 'pas actif' ? ' selected' : '') . ">Pas actif</option> <option value='ne pas déranger'" . ($statut == 'ne pas déranger' ? ' selected' : '') . ">Ne pas déranger</option> </select> </div> </div>";
               }
             ?>
 
@@ -130,14 +134,7 @@
         inputs.forEach(input => input.removeAttribute('readonly'));
       });
 
-      //pour pouvoir tout supprimer d'un coup
-      document.getElementById('del-btn')?.addEventListener('click', function () {
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-          input.removeAttribute('readonly');
-          input.value= "";
-        });
-      });
+      
     </script>
   </body>
 </html>
