@@ -6,6 +6,11 @@ body {
     overflow: hidden; /* Bloque tout scroll global */
 }
 
+.left-part {
+    align-content: center;
+    margin: auto 200px;
+}
+
 
 .right-part {
     background-color: #FFFFFF;
@@ -172,6 +177,9 @@ input[type=submit]:active {
 }
 
 @media (max-width: 768px) {
+    .left-part {
+        display: none;
+    }
     .right-part {
         width: 100%;
         border-radius: 0;

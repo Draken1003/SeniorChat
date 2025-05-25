@@ -33,6 +33,9 @@
     <title>SeniorChat</title>
 </head>
     <body>
+        <div class="left-part">
+            <img src="../imgs/logoLogin.png" alt="logo">
+        </div>
         <div class="right-part">
             <div class="title">
                 <p>Bonjour</p>
