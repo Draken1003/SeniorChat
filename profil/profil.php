@@ -14,7 +14,7 @@
   <body>
 
     <?php
-      include("connexion.inc.php");
+      include("../connexion.inc.php");
       session_start();
 
       if (isset($_SESSION['identifiant'])) {
