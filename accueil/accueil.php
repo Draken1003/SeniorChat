@@ -94,11 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
             <?php endif; ?>
           </div>
       </div>
-
-      <div id="popup1" class="popup">
-        <h2>Description:</h2>
-        <p>Conférence pour la pension d'invalidité (fin d’annuité)</p>
-      </div>
     </div>
   </body>
   <script>
