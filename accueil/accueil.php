@@ -63,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
         <form action="" method="post">
           <input type="submit" name="logout" value="">
         </form>
-        
       </div>
     </header>
 

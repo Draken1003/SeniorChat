@@ -11,8 +11,8 @@ body {
   justify-content: center;
 }
 .page {
-  width: 40%;
-  height: 80%;
+  width: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,33 +25,45 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: relative;
 }
 header h1 {
   font-family: "Cal Sans", sans-serif;
   color: white;
 }
+header a {
+  position: absolute;
+  left: 2%;
+  width: 5%;
+  height: 40%;
+  background-image: url("/img/home.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 .center-page {
+  padding-bottom: 10px;
   width: 100%;
-  height: 140%;
+  height: 90%;
   background-color: var(--purple-color-light);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  justify-content: space-between;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 .photo {
   width: 100%;
   height: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: center;
+  gap: 7%;
 }
 #pfp {
-  width: 15%;
+  width: 6%;
   border-radius: 100%;
 }
 .center-page form {
@@ -68,10 +80,9 @@ form .photo .buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 3%;
   width: 100%;
   height: 20%;
-  margin-top: 2%;
+  gap: 3%;
 }
 form .photo .buttons button {
   width: 15%;
@@ -82,9 +93,10 @@ form .photo .buttons button {
   font-family: "Cal Sans", sans-serif;
   font-size: 1vw;
   max-height: 30px;
+  max-width: 400px;
 }
 form .photo .buttons button:nth-of-type(1) {
-  background-color: var(--purple-color-light);
+  background-color: var(--purple-color);
 }
 #avatar {
   margin-left: 10px;
@@ -92,7 +104,6 @@ form .photo .buttons button:nth-of-type(1) {
 .photo input {
   font-family: "Cal Sans", sans-serif;
   font-size: 1vw;
-  min-height: 30px;
 }
 form .photo label {
   font-size: 1vw;
@@ -107,44 +118,30 @@ input[type="file"]::file-selector-button {
   border-radius: 10px;
 }
 
+
+
+
 .bot-infos {
   width: 100%;
-  height: 55%;
-}
-form .bot-infos {
-  width: 100%;
-  height: 100%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: end;
-  gap: 3%;
-  margin-top: 5px;
+  align-items: center;
+  gap: 4%;
 }
+
 .infos {
-  width: 100%;
+  width: 70%;
   height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5%;
 }
-.infos img {
-  margin-left: 15%;
-}
-.right-infos {
+
+.infos input, select {
   width: 90%;
-  height: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.right-infos img {
-  margin-left: 2%;
-  width: 5%;
-}
-
-.infos input {
-  width: 40%;
   height: 100%;
   color: grey;
   border-radius: 10px;
@@ -154,24 +151,16 @@ form .bot-infos {
   font-size: 1vw;
 }
 
-.infos select{
-  width: 40%;
-  height: 100%;
-  color: grey;
-  border-radius: 10px;
-  border: none;
-  padding-left: 1%;
-  font-family: "Fredoka", sans-serif;
-  font-size: 1vw;
-}
 .title-infos {
-  width: 30%;
   height: 100%;
+  width: 50%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 5%;
 }
 
-.right-infos .title-infos h2 {
+.title-infos h2 {
   font-family: "Fredoka", sans-serif;
   font-weight: 400;
   margin-bottom: 1%;
@@ -179,7 +168,7 @@ form .bot-infos {
 }
 
 .profil-icon {
-  width: 3%;
+  width: 5%;
   margin-left: 5px;
 }
 
@@ -189,70 +178,21 @@ form .bot-infos {
   display: flex;
   justify-content: end;
   align-items: center;
+  position: relative;
 }
 form .bot-infos button {
+  position: absolute;
+  right: 12%;
   width: 15%;
+  height: 80%;
   border-radius: 10px;
   border: none;
   background-color: rgb(255, 255, 255);
   font-family: "Cal Sans", sans-serif;
-  margin-right: 5%;
   font-size: 1vw;
 }
 
-/*     MEDIA QUERIES    */
 
-/* Hauteur < 750px et largeur > 1500px*/
-@media screen and (max-height: 750px) and (min-width: 1500px) {
-  .photo {
-    height: 40%;
-    justify-content: start;
-  }
-  #pfp {
-    width: 10%;
-  }
-}
 
-/*hauteur < 750px et largeur < 700px */
-@media screen and (max-height: 750px) and (max-width: 700px) {
-  .center-page .photo {
-    height: 30%;
-  }
 
-  .center-page form .photo .buttons {
-    margin: 0;
-  }
-  .bot-infos {
-    height: 50%;
-  }
-  .infos img {
-    margin-left: 10%;
-  }
-}
 
-/* Hauteur > 750px*/
-@media screen and (min-height: 750px) {
-  .photo {
-    height: 35%;
-    justify-content: end;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  form .bot-infos .infos img {
-    margin-left: 10%;
-  }
-  form .bot-infos .infos .right-infos {
-    justify-content: start;
-    margin-left: 5%;
-  }
-  form .bot-infos .infos .right-infos .title-infos {
-    width: 40%;
-  }
-  form .bot-infos .infos .right-infos input {
-    max-height: 25px;
-  }
-  form .bot-infos .infos .right-infos .title-infos h2 {
-    width: 100%;
-  }
-}

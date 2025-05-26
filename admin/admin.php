@@ -2,12 +2,6 @@
 session_start();
 include("../connexion.inc.php");
 
-// Vérification de session et logout
-if (!isset($_SESSION['identifiant'])) {
-    header("Location: ../login/login.php");
-    exit;
-}
-
 $mois_fr = [
     1 => 'JANV', 
     2 => 'FÉVR', 
@@ -277,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
                 $prenomSen= $senior['prenom'];
                 $nomSen= $senior['nom'];
                 $idSen= $senior['id'];
-                echo "<div class='senior'> <div class='left'> <div class='img' style='background-image: url($pdp);'></div></div>
+                echo "<div class='senior'> <div class='left'> <div class='img' style='background-image: url(../profil/$pdp);'></div></div>
                 <div class='middle'> <p> $prenomSen $nomSen</p> </div> <div class='right'> <form action='' method='POST'> <input type='hidden' name='supprId' value=$idSen> <input type='submit' name='suppr' value='Supprimer'> </form> </div></div> <hr>";
             }
 

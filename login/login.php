@@ -1,7 +1,7 @@
 <?php
+    include("../connexion.inc.php");
     // on vérifie que le formulaire à été posté car sinon il s'execute dès le début
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        include("../connexion.inc.php");
         session_start();
         $id = $_POST["identifiant"];
         $mdp = $_POST["mdp"];            
@@ -10,6 +10,7 @@
         $verif->bindParam(':id', $id);
         $verif->bindParam(':mdp', $mdp);
         $verif->execute();
+        
         if ($verif->rowCount() > 0) {
             $row = $verif->fetch();
             $_SESSION['u_id'] = $row['id'];
