@@ -1,0 +1,395 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--text-font);
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.admin-container {
+    display: flex;
+    height: 100%;
+}
+
+/* -------------------------- Sidebar ---------------------- */
+.sidebar {
+    width: 250px;
+    background-color: var(--purple-color-dark);
+    color: white;
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebar h1 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-section {
+    margin-bottom: 25px;
+}
+
+.menu-section h2 {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar li.active {
+    background-color: var(--purple-color);
+    font-weight: bold;
+}
+
+/* -------------------------- Main Content ---------------------- */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-section {
+    display: none;
+    height: 100%;
+    width: 45%;
+    max-width: 500px;
+}
+.content-section:nth-of-type(3) {
+    height: 60%;
+    align-items: center;
+}
+.content-section:nth-of-type(3) .ajout-event{
+    height: 100%;
+}
+.content-section:nth-of-type(3) .ajout-event .bottom form input {
+    width: 80%;
+    border-radius: 10px;
+    border: 2px solid blue;
+    height: 15%;
+    border: 0.1vw solid grey;
+}
+
+.content-section:nth-of-type(3) .ajout-event .bottom form .bouton input {
+    width: 40%;
+    height: 100%;
+    border: 2px solid var(--purple-color-dark);
+    width: 30%;
+    height: 100%;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-family: var(--text-font);
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s linear;
+}
+.content-section:nth-of-type(3) .ajout-event .bottom form .bouton input:nth-of-type(2) {
+    background-color: var(--text-color);
+    color: var(--purple-color-dark);
+}
+#compte-creer {
+    height: 60%;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Styles existants conservés et adaptés */
+.container-events {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px;
+    height: 100%;
+    background-color: white;
+}
+
+.confs {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    padding: 10px 20px;
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+
+.confs>.conf {
+    box-shadow: 0px 3px 15px -4px rgba(0, 0, 0, 0.25);
+    background-color: var(--text-color);
+    color: var(--purple-color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 15px;
+    border-radius: 20px;
+}
+
+.confs>.conf>h1 {
+    color: var(--purple-color-dark);
+    text-transform: uppercase;
+    text-wrap: nowrap;
+    text-align: center;
+    font-size: 1.5vw;
+}
+
+.confs>.conf>.description {
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.confs>.conf>.description>p {
+    color: var(--purple-color-dark);
+    font-weight: bold;
+    font-size: 1vw;
+}
+
+.confs>.conf>.description>p:nth-child(2) {
+    color: var(--purple-color);
+    font-size: 0.8vw;
+}
+
+.confs>.conf>form {
+    width: 11%;
+    height: 65%;
+}
+
+.confs>.conf>form>input {
+    width: 100%;
+    height: 100%;
+    background-color: var(--purple-color-dark);
+    background-image: url(/icon/button-icon/moin.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    color: var(--text-color);
+    border: none;
+    padding: 2px 14px;
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.confs>.conf>form>input:hover {
+    opacity: 50%;
+}
+
+.ajout-compte, .ajout-event {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px;
+    height: 100%;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.top {
+    height: auto;
+    font-family: var(--text-font);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.top>h1 {
+    text-align: center;
+    font-size: clamp(15px, 1.8vw, 50px);
+}
+
+.bottom {
+    padding-top: 20px;
+    height: 70%;
+}
+
+.bottom>form {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.top-input {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.bottom>form>.top-input>input {
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    color: black;
+    font-family: var(--text-font);
+    font-weight: bold;
+    height: 15%;
+    width: 80%;
+    padding-left: 15px;
+    border: none;
+    border-radius: 10px;
+}
+
+.bottom>form>.bouton {
+    display: flex;
+    justify-content: space-evenly;
+    height: 15%;
+    width: 100%;
+}
+.bouton input:first-child {
+    background-color: var(--text-color);
+}
+.bouton input:last-child {
+    background-color: var(--purple-color-dark);
+}
+.bottom>form>.bouton>input {
+    border: 2px solid var(--purple-color-dark);
+    width: 30%;
+    height: 100%;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-family: var(--text-font);
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.bottom>form>.bouton>input:hover {
+    background-color: white;
+    border: solid var(--purple-color-dark) 2px;
+    color: var(--purple-color-dark);
+}
+
+.bottom>form>.bouton>input:first-child {
+    background-color: white;
+    color: var(--purple-color-dark);
+}
+
+.bottom>form>.bouton>input:first-child:hover {
+    color: red;
+    border-color: red;
+}
+
+.container-senior {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px;
+    height: 100%;
+    padding: 10px;
+    background-color: white;
+}
+
+.seniors {
+    height: calc(100% - 40px);
+    overflow-y: auto;
+    width: 100%;
+}
+
+.senior {
+    width: 100%;
+    display: flex;
+    height: 10%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.left {
+    width: 10%;
+    height: 100%;
+}
+
+.img {
+    width: 15%;
+    height: 80%;
+    border-radius: 25px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ddd;
+}
+
+
+.middle>p {
+    color: black;
+    font-family: var(--text-font);
+    font-size: 1.25vw;
+}
+
+.right {
+    width: 25%;
+    height: 100%;
+}
+#supr-compte {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right>form>input[type="submit"] {
+    color: var(--purple-color-dark);
+    font-family: var(--text-font);
+    font-weight: bold;
+    font-size: clamp(10px, 0.8vw, 30px);
+    border: 2px solid var(--purple-color-dark);
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s linear;
+    width: 100%;
+    padding: 5px;
+    min-width: 70px;
+}
+
+.right>form>input[type="submit"]:hover {
+    color: red;
+    border-color: red;
+}
+
+hr {
+    margin: 10px auto;
+    border: 1px solid rgba(13, 23, 135, 0.12);
+}
+
+/* Barres de défilement */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
