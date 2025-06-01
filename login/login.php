@@ -12,12 +12,18 @@
         $verif->execute();
         
         if ($verif->rowCount() > 0) {
-            $row = $verif->fetch();
-            $_SESSION['u_id'] = $row['id'];
-            $_SESSION['identifiant'] = $row['identifiant'];
+            if ($id != 'admin') {
+                $row = $verif->fetch();
+                $_SESSION['u_id'] = $row['id'];
+                $_SESSION['identifiant'] = $row['identifiant'];
 
-            header("Location: ../accueil/accueil.php"); // juste pour test donc faudrai mettre la vrai page
-            exit;
+                header("Location: ../accueil/accueil.php");
+                exit;
+            } else {
+                header("Location: ../admin/admin.php");
+                exit;
+            }
+            
         } else {
             $error = "<p class='errorMessage'>identifiant ou mot de passe incorrect</p>";
         }
