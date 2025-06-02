@@ -1,5 +1,5 @@
 <?php
-    include("../connexion.inc.php");
+    include("../connexion.inc.php"); // fichier pour la connection à la base de données.
     // on vérifie que le formulaire à été posté car sinon il s'execute dès le début
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
@@ -11,20 +11,25 @@
         $verif->bindParam(':mdp', $mdp);
         $verif->execute();
         
+        // si il y a une ligne qui correspond bien à notre identifiant 
+        // on regarde si c'est un admin sinon on le connecte à son espace
         if ($verif->rowCount() > 0) {
+            $row = $verif->fetch();
             if ($id != 'admin') {
-                $row = $verif->fetch();
                 $_SESSION['u_id'] = $row['id'];
                 $_SESSION['identifiant'] = $row['identifiant'];
 
                 header("Location: ../accueil/accueil.php");
                 exit;
-            } else {
+            } else { // si c'est un admin, on le connecte à son espace
+                $_SESSION['u_id'] = $row['id'];
+                $_SESSION['identifiant'] = $row['identifiant'];
+
                 header("Location: ../admin/admin.php");
                 exit;
             }
             
-        } else {
+        } else { // si le mot de passe ou l'identifiant n'est pas bon
             $error = "<p class='errorMessage'>identifiant ou mot de passe incorrect</p>";
         }
     }

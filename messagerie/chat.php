@@ -110,7 +110,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'load_messages') {
             <a href="../accueil/accueil.php"><img src="../imgs/messages.png" /></a>
             <a href="../profil/profil.php"><img src="../imgs/profil.png" /></a>
             <form action="" method="post">
-                <input type="submit" name="logout" value="Déconnexion" />
+                <input type="submit" name="logout" value=""/>
             </form>
         </div>
     </header>

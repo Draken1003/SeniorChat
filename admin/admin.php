@@ -1,12 +1,13 @@
 <?php
-
 session_start();
 include("../connexion.inc.php");
 
 // Vérification de session et logout
 if (!isset($_SESSION['identifiant'])) {
-    header("Location: ../login/login.php");
-    exit;
+    if ($_SESSION['identifiant'] != 'admin') {
+        header("Location: ../login/login.php");
+        exit;
+    } 
 }
 
 $mois_fr = [
@@ -190,14 +191,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
                     <div class="bottom">
                         <form action="" method="POST">
                             <div class="top-input">
-                                <input type="text" placeholder="Nom">
-                                <input type="text" placeholder="Prénom">
-                                <input type="text" placeholder="Identifiant">
-                                <input type="text" placeholder="Mot de passe">
+                                <input type="text" name="nom" placeholder="Nom">
+                                <input type="text" name="prenom" placeholder="Prénom">
+                                <input type="text" name="identifiant" placeholder="Identifiant">
+                                <input type="text" name="motdepasse" placeholder="Mot de passe">
                             </div>
                             <div class="bouton">
                                 <input type="reset" value="Annuler">
-                                <input type="submit" value="Créer">
+                                <input type="submit" name="creer" value="Créer">
                             </div>
                         </form>
                     </div>
@@ -218,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
 
                 $nom = $_POST['nom'];
                 $prenom = $_POST['prenom'];
-                $sqlSenior = "INSERT INTO SENIOR (id, nom, prenom,id_a) VALUES ('$newNum', '$nom', '$prenom','$newNum')";
+                $sqlSenior = "INSERT INTO senior (id, nom, prenom,id_a) VALUES ('$newNum', '$nom', '$prenom','$newNum')";
                 $stmt = $cnx->prepare($sqlSenior);
                 $stmt->execute();
 
@@ -232,6 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
                 header("Location: " . $_SERVER['REQUEST_URI']);
                 exit;
             }
+
             ?>
 
             <!-- Section liste des comptes -->
