@@ -114,22 +114,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addEvent'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
     $idSup = $_POST['supprId'];
 
-    $sqlAuth = "DELETE FROM AUTHENTIFICATION WHERE id = '$idSup'";
-    $stmtAuth = $cnx->prepare($sqlAuth);
-
-    $sqlSuppr = "DELETE FROM SENIOR WHERE id = '$idSup'";
-    $stmtSuppr = $cnx->prepare($sqlSuppr);
-
-    $sqlAgenda = "DELETE FROM AGENDA WHERE id_a = '$idSup'";
-    $stmtAgenda = $cnx->prepare($sqlAgenda);
-    
-    $sqlMessage = "DELETE FROM MESSAGE WHERE id = '$idSup' OR id_1 = '$idSup'";
+    $sqlMessage = "DELETE FROM MESSAGE WHERE id = :id OR id_1 = :id";
     $stmtMessage = $cnx->prepare($sqlMessage);
+    $stmtMessage->execute(['id' => $idSup]);
 
-    $stmtAuth->execute();       
-    $stmtSuppr->execute();          
-    $stmtAgenda->execute();
-    $stmtMessage->execute();
+    $sqlInscrire = "DELETE FROM S_INSCRIRE WHERE id = :id";
+    $stmtInscrire = $cnx->prepare($sqlInscrire);
+    $stmtInscrire->execute(['id' => $idSup]);
+
+    $sqlAuth = "DELETE FROM AUTHENTIFICATION WHERE id = :id";
+    $stmtAuth = $cnx->prepare($sqlAuth);
+    $stmtAuth->execute(['id' => $idSup]);
+
+    $sqlContenir = "DELETE FROM CONTENIR WHERE id_a = :id";
+    $stmtContenir = $cnx->prepare($sqlContenir);
+    $stmtContenir->execute(['id' => $idSup]);
+
+    $sqlSuppr = "DELETE FROM SENIOR WHERE id = :id";
+    $stmtSuppr = $cnx->prepare($sqlSuppr);
+    $stmtSuppr->execute(['id' => $idSup]);
+
+    $sqlAgenda = "DELETE FROM AGENDA WHERE id_a = :id";
+    $stmtAgenda = $cnx->prepare($sqlAgenda);
+    $stmtAgenda->execute(['id' => $idSup]);
+
 
     header("Location: " . $_SERVER['PHP_SELF']); // permet de redireger vers la même page ( pas besoin de refresh)
     exit;
