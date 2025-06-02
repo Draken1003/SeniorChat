@@ -154,7 +154,6 @@ $monthNames = [
 ];
 
 // gestion de la desinscription des évenements
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteEvent']) && $_POST['deleteEvent'] === 'Se désinscrire') {
     if (isset($_POST['id_e'])) {
         try {
