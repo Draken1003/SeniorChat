@@ -1,57 +1,151 @@
 * {
     margin: 0;
     padding: 0;
-}
-
-body {
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    height: 100vh;
-    padding: 20px;
     box-sizing: border-box;
 }
 
-/* --------------------------Left---------------------- */
-.container-events {
-    border: solid 1px #BEBEBE;
-    border-radius: 20px ;
-    width: calc(100%/3);
+body {
+    font-family: var(--text-font);
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.admin-container {
+    display: flex;
+    height: 100%;
+}
+
+/* -------------------------- Sidebar ---------------------- */
+.sidebar {
+    width: 250px;
+    background-color: var(--purple-color-dark);
+    color: white;
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebar h1 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-section {
+    margin-bottom: 25px;
+}
+
+.menu-section h2 {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar li.active {
+    background-color: var(--purple-color);
+    font-weight: bold;
+}
+
+/* -------------------------- Main Content ---------------------- */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.content-section {
+    display: none;
+    height: 100%;
+    width: 45%;
+    max-width: 500px;
+}
+.content-section:nth-of-type(3) {
+    height: 60%;
+    align-items: center;
+}
+.content-section:nth-of-type(3) .ajout-event{
+    height: 100%;
+}
+.content-section:nth-of-type(3) .ajout-event .bottom form input {
+    width: 80%;
+    border-radius: 10px;
+    border: 2px solid blue;
+    height: 15%;
+    border: 0.1vw solid grey;
+}
+
+.content-section:nth-of-type(3) .ajout-event .bottom form .bouton input {
+    width: 40%;
+    height: 100%;
+    border: 2px solid var(--purple-color-dark);
+    width: 30%;
+    height: 100%;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-family: var(--text-font);
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s linear;
+}
+.content-section:nth-of-type(3) .ajout-event .bottom form .bouton input:nth-of-type(2) {
+    background-color: var(--text-color);
+    color: var(--purple-color-dark);
+}
+#compte-creer {
+    height: 60%;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Styles existants conservés et adaptés */
+.container-events {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px;
+    height: 100%;
+    background-color: white;
+}
+
 .confs {
     height: 90%;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     gap: 23px;
     padding: 10px 20px;
-    margin: 0 15px;
+    margin: 0 auto;
     overflow-y: scroll;
-    box-sizing: border-box;
-}
-
-.confs::-webkit-scrollbar {
-    width: 6px;
-    border-radius: 10px;
-}
-
-.confs::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.22);
-    border-radius: 10px;
 }
 
 .confs>.conf {
     box-shadow: 0px 3px 15px -4px rgba(0, 0, 0, 0.25);
     background-color: var(--text-color);
     color: var(--purple-color-light);
-    font-family: var(--text-font);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,12 +162,13 @@ body {
     font-size: 1.5vw;
 }
 
-.confs>.conf>.description{
+.confs>.conf>.description {
     height: 90%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
+
 .confs>.conf>.description>p {
     color: var(--purple-color-dark);
     font-weight: bold;
@@ -85,10 +180,11 @@ body {
     font-size: 0.8vw;
 }
 
-.confs>.conf>form{
+.confs>.conf>form {
     width: 11%;
     height: 65%;
 }
+
 .confs>.conf>form>input {
     width: 100%;
     height: 100%;
@@ -110,98 +206,88 @@ body {
     opacity: 50%;
 }
 
-/* ------------------------------------------------------ */
-
-/* --------------------------Middle---------------------- */
-.container-form {
-    width: calc(100%/3);
+.ajout-compte, .ajout-event {
+    border: solid 1px #BEBEBE;
+    border-radius: 20px;
     height: 100%;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
-    
-}
-
-.ajout-compte {
-    border: solid 1px #BEBEBE;
-    border-radius: 20px ;
-    height: 50%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.ajout-event {
-    border: solid 1px #BEBEBE;
-    border-radius: 20px ;
-    height: 50%;
-    padding: 20px;
-    box-sizing: border-box;
+    justify-content: space-evenly;
 }
 
 .top {
-    height: 10%;
+    height: auto;
     font-family: var(--text-font);
-    font-size: 0.8vw;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
 }
 
 .top>h1 {
     text-align: center;
+    font-size: clamp(15px, 1.8vw, 50px);
 }
 
 .bottom {
-    box-sizing: border-box;
-    padding-top: 30px;
-    height: 90%;
-    display: flex;
-    justify-content: center;
+    padding-top: 20px;
+    height: 70%;
 }
 
 .bottom>form {
-    height: 100%;
-    width: 50%;
+    height: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 }
-
-.bottom>form>input {
+.top-input {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.bottom>form>.top-input>input {
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
     color: black;
     font-family: var(--text-font);
     font-weight: bold;
-    height: 12.5%;
-    width: 100%;
-    padding-left: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: 15%;
+    width: 80%;
+    padding-left: 15px;
     border: none;
     border-radius: 10px;
-    margin: 0 auto;
 }
 
 .bottom>form>.bouton {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    height: 20%;
+    justify-content: space-evenly;
+    height: 15%;
+    width: 100%;
 }
-
+.bouton input:first-child {
+    background-color: var(--text-color);
+}
+.bouton input:last-child {
+    background-color: var(--purple-color-dark);
+}
 .bottom>form>.bouton>input {
     border: 2px solid var(--purple-color-dark);
-    width: 50%;
-    height: 60%;
+    width: 30%;
+    height: 100%;
     border-radius: 10px;
-    background-color: var(--purple-color-dark);
     color: var(--text-color);
     font-family: var(--text-font);
     font-weight: bold;
     cursor: pointer;
     transition: .2s linear;
 }
+
 .bottom>form>.bouton>input:hover {
     background-color: white;
     border: solid var(--purple-color-dark) 2px;
@@ -211,112 +297,99 @@ body {
 .bottom>form>.bouton>input:first-child {
     background-color: white;
     color: var(--purple-color-dark);
-    
 }
-.bottom>form>.bouton>input:first-child:hover{
+
+.bottom>form>.bouton>input:first-child:hover {
     color: red;
     border-color: red;
 }
 
-
-textarea{
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-    resize: none;
-    height: 40%;
-    width: 100%;
-    border: none;
-    color: black;
-    font-family: var(--text-font);
-    font-weight: bold;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-/* ------------------------------------------------------ */
-
-
-
-
-/* --------------------------Right---------------------- */
-
 .container-senior {
     border: solid 1px #BEBEBE;
-    border-radius: 20px ;
-    width: calc(100%/3);
+    border-radius: 20px;
     height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 10px;
+    background-color: white;
 }
 
-.seniors{
-    box-sizing: border-box;
-    padding-right: 20px;
-    height: 100%;
-    overflow-y: scroll;
-}
-.seniors::-webkit-scrollbar {
-    width: 6px;
-    border-radius: 10px;
-}
-.seniors::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.22);
-    border-radius: 10px;
-}
-.senior{
-    display: flex;
-    height: 7.5%;
-    box-sizing: border-box;
-}
-
-.left{
-    width: 10%;
-}
-.left > .img{
+.seniors {
+    height: calc(100% - 40px);
+    overflow-y: auto;
     width: 100%;
-    height: 87.5%;
+}
+
+.senior {
+    width: 100%;
+    display: flex;
+    height: 10%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.left {
+    width: 10%;
+    height: 100%;
+}
+
+.img {
+    width: 15%;
+    height: 80%;
     border-radius: 25px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #ddd;
 }
 
-.middle{
-    width: 70%;
-    display: flex;
-    align-items: center;
-    padding-left: 40px;
-    box-sizing: border-box;
-}
-.middle > p{
+
+.middle>p {
     color: black;
     font-family: var(--text-font);
     font-size: 1.25vw;
 }
 
-.right{
-    width: 20%;
+.right {
+    width: 25%;
+    height: 100%;
+}
+#supr-compte {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.right > form > input[type="submit"]{
+.right>form>input[type="submit"] {
     color: var(--purple-color-dark);
     font-family: var(--text-font);
     font-weight: bold;
+    font-size: clamp(10px, 0.8vw, 30px);
     border: 2px solid var(--purple-color-dark);
     background-color: white;
-    padding: 10px;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.2s linear;
+    width: 100%;
+    padding: 5px;
+    min-width: 70px;
 }
-.right > form > input[type="submit"]:hover{
+
+.right>form>input[type="submit"]:hover {
     color: red;
     border-color: red;
 }
 
-hr{
+hr {
     margin: 10px auto;
-    border:1px solid  rgba(13, 23, 135, 0.12);
+    border: 1px solid rgba(13, 23, 135, 0.12);
+}
+
+/* Barres de défilement */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }

@@ -1,6 +1,13 @@
-<?php 
+<?php
+
 session_start();
 include("../connexion.inc.php");
+
+// Vérification de session et logout
+if (!isset($_SESSION['identifiant'])) {
+    header("Location: ../login/login.php");
+    exit;
+}
 
 $mois_fr = [
     1 => 'JANV', 
@@ -127,19 +134,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
     exit;
 }
 
-
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="admin.css">
-        <link rel="stylesheet" href="/color.css">
-        <title>Dashboard</title>
-    </head>
-    <body>
-        <?php // affiche un popup  pour indiquer plein de trucs comme l'inscription.
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="../color.css">
+    <title>Dashboard Admin</title>
+</head>
+
+<body>
+    <?php // affiche un popup  pour indiquer plein de trucs comme l'inscription.
+    
             if(isset($_SESSION['flash_message'])) {
                 $message = $_SESSION['flash_message'];
                 //echo "<p>" . $_SESSION['flash_message'] . "</p>";
@@ -147,138 +157,187 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppr'])) {
                 unset($_SESSION['flash_message']);
             }
             
-        ?>
-        <div class="container-events">
-        <div class="confs">
-                
-                <?php
-                // affichage des évenements publics
-                    $query = $cnx->query("SELECT * FROM evenement ORDER BY date_h;");
-                    $events = $query->fetchAll(PDO::FETCH_ASSOC);
-                    foreach ($events as $event) {
-                        if (!$event['perso']) {
-                            echo '<div class="conf">';
-                            // convertit la date dans le bon format pour pouvoir l'afficher comme on veut
-                            $date = new DateTime($event['date_h']);
-                            $jour = $date->format('j');
-                            $mois = $mois_fr[(int)$date->format('n')];
-                            
-                            // affiche le jour et le mois
-                            echo "<h1>$jour<br>$mois</h1>";
-                            
-                            echo '<div class="description">';
+    ?>
 
-                            // affiche le libelle de l'event
-                            echo '<p>' . $event['libelle'] . '</p>';
-                            echo '<p>Heure: ' . date('H:i', strtotime($event['heure'] ?? '')) . '</p>';
-                            //affiche le nombre de places
-                            echo '<p>' . $event['nbplaces'] . ' places</p>';
-                            echo "</div>";
-                            // bouton pour s'inscrire à l'event
-                            echo '  <form action="" method="post">
-                                        <input type="hidden" name="id_e" value="' . $event['id_e'] . '">
-                                        <input type="submit" name="action" class="inscription" value="">
-                                    </form>';
-                            echo '</div>';
-                        }
-                    }  
-                ?>
+    <div class="admin-container">
+        <!-- Menu latéral -->
+        <div class="sidebar">
+            <h1>Administration</h1>
+            <div class="menu-section">
+                <h2>Gestion des comptes</h2>
+                <ul>
+                    <li class="active" data-section="compte-creer">Créer un compte</li>
+                    <li data-section="compte-liste">Liste des comptes</li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h2>Gestion des activités</h2>
+                <ul>
+                    <li data-section="activite-creer">Créer une activité</li>
+                    <li data-section="activite-liste">Liste des activités</li>
+                </ul>
             </div>
         </div>
 
-        <div class="container-form">
-
-            <div class="ajout-compte">
-                <div class="top">
-                    <h1>Créer un nouveau compte</h1>
-                </div>
-                <div class="bottom">
-                    <form action="" method="POST">
-                        <input type="text" placeholder="Nom">
-                        <input type="text" placeholder="Prénom">
-                        <input type="text" placeholder="Identifiant">
-                        <input type="text" placeholder="Mot de passe">
-                        <div class="bouton">
-                            <input type="reset" value="Annuler">
-                            <input type="submit" value="Créer">
-                        </div>
-                    </form>
+        <!-- Contenu principal -->
+        <div class="main-content">
+            <!-- Section création de compte -->
+            <div id="compte-creer" class="content-section active">
+                <div class="ajout-compte">
+                    <div class="top">
+                        <h1>Créer un nouveau compte</h1>
+                    </div>
+                    <div class="bottom">
+                        <form action="" method="POST">
+                            <div class="top-input">
+                                <input type="text" placeholder="Nom">
+                                <input type="text" placeholder="Prénom">
+                                <input type="text" placeholder="Identifiant">
+                                <input type="text" placeholder="Mot de passe">
+                            </div>
+                            <div class="bouton">
+                                <input type="reset" value="Annuler">
+                                <input type="submit" value="Créer">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-             <?php
-                //CREER un senior
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['creer'])) {
+            <?php
+            //CREER un senior
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['creer'])) {
 
-                    $req = $cnx->query("SELECT MAX(id) AS last_num FROM senior");
-                    $res = $req->fetch();
-                    $newNum = $res['last_num'] + 1;
+                $req = $cnx->query("SELECT MAX(id) AS last_num FROM senior");
+                $res = $req->fetch();
+                $newNum = $res['last_num'] + 1;
 
-                    $sqlAgenda = "INSERT INTO agenda (id_a) VALUES ('$newNum')";
-                    $stmtAgenda = $cnx->prepare($sqlAgenda);
-                    $stmtAgenda->execute(); 
+                $sqlAgenda = "INSERT INTO agenda (id_a) VALUES ('$newNum')";
+                $stmtAgenda = $cnx->prepare($sqlAgenda);
+                $stmtAgenda->execute();
 
-                    $nom= $_POST['nom'];
-                    $prenom= $_POST['prenom'];
-                    $sqlSenior = "INSERT INTO SENIOR (id, nom, prenom,id_a) VALUES ('$newNum', '$nom', '$prenom','$newNum')";
-                    $stmt = $cnx->prepare($sqlSenior);
-                    $stmt->execute();   
+                $nom = $_POST['nom'];
+                $prenom = $_POST['prenom'];
+                $sqlSenior = "INSERT INTO SENIOR (id, nom, prenom,id_a) VALUES ('$newNum', '$nom', '$prenom','$newNum')";
+                $stmt = $cnx->prepare($sqlSenior);
+                $stmt->execute();
 
-                    $id=$_POST['identifiant'];
-                    $pass= $_POST['motdepasse'];
-                    $sqlAuth = "INSERT INTO AUTHENTIFICATION (identifiant, password, id) VALUES ('$id', '$pass', '$newNum')";
-                    $stmtAuth = $cnx->prepare($sqlAuth);
-                    $stmtAuth->execute();
+                $id = $_POST['identifiant'];
+                $pass = $_POST['motdepasse'];
+                $sqlAuth = "INSERT INTO AUTHENTIFICATION (identifiant, password, id) VALUES ('$id', '$pass', '$newNum')";
+                $stmtAuth = $cnx->prepare($sqlAuth);
+                $stmtAuth->execute();
 
-                    echo "Compte créé.";
-                    header("Location: ".$_SERVER['REQUEST_URI']);
-                    exit;
-                }
+                echo "Compte créé.";
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit;
+            }
             ?>
 
-            <div class="ajout-event">
-                <div class="top">
-                    <h1>Créer un nouveau évènement</h1>
-                </div>
-                <div class="bottom">
-                    <form action="" method="POST">
-                        <input type="text" placeholder="Titre" name="titre" required>
-                        <input type="date" placeholder="Date" name="date" required>
-                        <input type="time" placeholder="heure" name="heure" required>
-                        <input type="number" placeholder="nb places" name="nbplaces" min="0" value="" required>
-                        <div class="bouton">
-                            <input type="hidden" name="addEvent" value="">
-                            <input type="reset" value="Annuler">
-                            <input type="submit" name="addEvent" value="Créer">
-                        </div>
-                    </form>
+            <!-- Section liste des comptes -->
+            <div id="compte-liste" class="content-section">
+                <div class="container-senior">
+                    <div class='seniors'>
+                        <?php
+                        
+                        //on affiche les seniors
+                        $sqlSeniors = "SELECT * FROM SENIOR";
+                        $stmtSen = $cnx->query($sqlSeniors);
+
+                        while ($senior = $stmtSen->fetch(PDO::FETCH_ASSOC)) {
+                            $pdp = $senior['pdp'];
+                            $prenomSen = $senior['prenom'];
+                            $nomSen = $senior['nom'];
+                            $idSen = $senior['id'];
+                            echo "<div class='senior'> <div class='img' style='background-image: url(../profil/$pdp);'></div>
+                            <p> $prenomSen $nomSen</p> <div class='right'> <form action='' method='POST' id='supr-compte'> <input type='hidden' name='supprId' value=$idSen> <input type='submit' name='suppr' value='Supprimer'> </form> </div></div> <hr>";
+                        }
+                        
+                        ?>
+                    </div>
                 </div>
             </div>
 
+            <!-- Section création d'activité -->
+            <div id="activite-creer" class="content-section">
+                <div class="ajout-event">
+                    <div class="top">
+                        <h1>Créer un nouveau évènement</h1>
+                    </div>
+                    <div class="bottom">
+                        <form action="" method="POST">
+                            <input type="text" placeholder="Titre" name="titre" required>
+                            <input type="date" placeholder="Date" name="date" required>
+                            <input type="time" placeholder="heure" name="heure" required>
+                            <input type="number" placeholder="nb places" name="nbplaces" min="0" value="" required>
+                            <div class="bouton">
+                                <input type="hidden" name="addEvent" value="">
+                                <input type="reset" value="Annuler">
+                                <input type="submit" name="addEvent" value="Créer">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section liste des activités -->
+            <div id="activite-liste" class="content-section">
+                <div class="container-events">
+                    <div class="confs">
+                        <?php
+
+                        // affichage des évenements publics
+                        $query = $cnx->query("SELECT * FROM evenement ORDER BY date_h;");
+                        $events = $query->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($events as $event) {
+                            if (!$event['perso']) {
+                                echo '<div class="conf">';
+                                // convertit la date dans le bon format pour pouvoir l'afficher comme on veut
+                                $date = new DateTime($event['date_h']);
+                                $jour = $date->format('j');
+                                $mois = $mois_fr[(int)$date->format('n')];
+
+                                // affiche le jour et le mois
+                                echo "<h1>$jour<br>$mois</h1>";
+
+                                echo '<div class="description">';
+
+                                // affiche le libelle de l'event
+                                echo '<p>' . $event['libelle'] . '</p>';
+                                echo '<p>Heure: ' . date('H:i', strtotime($event['heure'] ?? '')) . '</p>';
+                                //affiche le nombre de places
+                                echo '<p>' . $event['nbplaces'] . ' places</p>';
+                                echo "</div>";
+                                // bouton pour s'inscrire à l'event
+                                echo '  <form action="" method="post">
+                                                    <input type="hidden" name="id_e" value="' . $event['id_e'] . '">
+                                                    <input type="submit" name="action" class="inscription" value="">
+                                                </form>';
+                                echo '</div>';
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="container-senior">
-           
-         <?php
-            //on affiche les seniors
-            $sqlSeniors= "SELECT * FROM SENIOR";
-            $stmtSen= $cnx->query($sqlSeniors);
+    <script>
+        // Gestion du menu latéral
+        document.querySelectorAll('.sidebar li').forEach(item => {
+            item.addEventListener('click', function() {
+                // Retire la classe active de tous les éléments
+                document.querySelectorAll('.sidebar li').forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
 
-            echo "<div class='seniors'>";
+                // Ajoute la classe active à l'élément cliqué
+                this.classList.add('active');
+                const sectionId = this.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+    </script>
+</body>
 
-            while ($senior = $stmtSen->fetch(PDO::FETCH_ASSOC)) {
-                $pdp= $senior['pdp'];
-                $prenomSen= $senior['prenom'];
-                $nomSen= $senior['nom'];
-                $idSen= $senior['id'];
-                echo "<div class='senior'> <div class='left'> <div class='img' style='background-image: url(../profil/$pdp);'></div></div>
-                <div class='middle'> <p> $prenomSen $nomSen</p> </div> <div class='right'> <form action='' method='POST'> <input type='hidden' name='supprId' value=$idSen> <input type='submit' name='suppr' value='Supprimer'> </form> </div></div> <hr>";
-            }
-
-            echo "</div>";
-        ?>
-            
-            
-        </div>
-    </body>
 </html>
