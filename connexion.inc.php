@@ -3,10 +3,10 @@
 /*
  * création d'objet PDO de la connexion qui sera représenté par la variable $cnx
  */
-$user =  "postgres";
-$pass =  "azerty";
+$user =  "seniorchat";
+$pass =  "S3ni0rCh4t2025!";
 try {
-    $cnx = new PDO("pgsql:host=localhost;dbname=SeniorChat_database", $user, $pass); 
+    $cnx = new PDO("pgsql:host=postgresql-seniorchat.alwaysdata.net;dbname=seniorchat_database", $user, $pass); 
     $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e) {
